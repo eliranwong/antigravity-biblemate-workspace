@@ -50,6 +50,226 @@ John 3:16 [NET] For this is the way God loved the world: He gave his one and onl
 The markdown display show all different versions for a single verse on a single line, which makes uers different to read.  Can you make the markdown display for version comparison better, with each version display on a single line.  For example, you may consider prefix each version with `\n* ` or `\n- ` or better alternatives?
 ```
 
+## Prompt for Creating Search Skill and /search Command
+
+```
+Create a new skill and a new slash command / workflow, to search for given words or phrases in a bible or multiple bibles, with search wildcards supported: `*` and `?`, `*` matches zero or more characters, `?` matches a single character.
+
+skill name should be simply `search`
+
+slash command should be simply `/search`
+
+bible databases are in sqlite format, stored either in ~/biblemate/data/bibles or ~/biblemate/data_custom/bibles
+
+Remember use home variable instead of hardcoding absolute paths, to make this repository portable.
+
+Valid bible database filenames are ended with *.bible
+
+search and retrieve matches from table `Verses`, return each verse content as a markdown line, with each version on a single line.
+
+NET.bible is the default bible if no bible version is specified
+
+the command `/search` can take both bible version(s) and bible reference(s)
+
+if bible version is not specified, NET.bible is the default database for retrieval.  If a specified version, use that version, If more than one version is specified, all specified versions are searched and retrieved with each verse display line by line. search results are grouped by book and chapter, with each book and chapter on a separate line.  Different bible versions results are separated with different blocks, as some matches in a particular version may not exist in another version.  For example, if user search for 'love' and there are 10 matches in NET.bible, 5 matches in CUV.bible and 8 matches in KJV.bible, then the output should be in 10 blocks, with each block containing the verse content for NET.bible, CUV.bible and KJV.bible if the verse exists in that version. Also, tell the total number of matches for each version, and in each book.
+
+examples for use: 
+
+/search love*God # search in NET.bible as default
+
+when a `+` sign is used to search for word combination, it means `AND` regardless of sequence.
+
+e.g. /search love*God # means love, followed by God, with `*` as wildcard character
+
+/search love+God+Jesus # means love AND God AND Jesus, regardless of sequence
+
+when a `|` sign is used to search for multiple words or phrases, it means `OR`
+
+e.g. /search Holy Spirit|the Spirit|Spirit of God # means Holy Spirit OR the Spirit OR Spirit of God
+
+the search can be very complex, e.g.
+
+/search love+God|sin # means love AND God OR sin
+
+To specify search version(s), e.g.
+
+/search NET love*God
+
+/search NET KJV love*God
+
+make sure you don't hardcode bible version list available in ~/biblemate/data/bibles and ~/biblemate/data_custom/bibles , as users can dynamatically add or remove bible databases into or from this folder.  Instead of hardcoding a static bible version list, you should always check if bible version specified is a valid name in those folder.
+```
+
+## Prompt for Creating Search Skills and Command for Searching Individual Books
+
+Now, along the same search, retrieval and display logic as the previous search skill, but for individual book only.
+
+Create 66 new skilla and 66 new slash commands / workflows, to search for given words or phrases in a bible or multiple bibles, limiting the search to a single book only, and with search wildcards supported: `*` and `?`, `*` matches zero or more characters, `?` matches a single character.
+
+Skill names are:
+
+Gen
+Exod
+Lev
+Num
+Deut
+Josh
+Judg
+Ruth
+1Sam
+2Sam
+1Kgs
+2Kgs
+1Chr
+2Chr
+Ezra
+Neh
+Esth
+Job
+Ps
+Prov
+Eccl
+Song
+Isa
+Jer
+Lam
+Ezek
+Dan
+Hos
+Joel
+Amos
+Obad
+Jonah
+Mic
+Nah
+Hab
+Zeph
+Hag
+Zech
+Mal
+Matt
+Mark
+Luke
+John
+Acts
+Rom
+1Cor
+2Cor
+Gal
+Eph
+Phil
+Col
+1Thess
+2Thess
+1Tim
+2Tim
+Titus
+Phlm
+Heb
+Jas
+1Pet
+2Pet
+1John
+2John
+3John
+Jude
+Rev
+
+Command names are:
+
+/Gen
+/Exod
+/Lev
+/Num
+/Deut
+/Josh
+/Judg
+/Ruth
+/1Sam
+/2Sam
+/1Kgs
+/2Kgs
+/1Chr
+/2Chr
+/Ezra
+/Neh
+/Esth
+/Job
+/Ps
+/Prov
+/Eccl
+/Song
+/Isa
+/Jer
+/Lam
+/Ezek
+/Dan
+/Hos
+/Joel
+/Amos
+/Obad
+/Jonah
+/Mic
+/Nah
+/Hab
+/Zeph
+/Hag
+/Zech
+/Mal
+/Matt
+/Mark
+/Luke
+/John
+/Acts
+/Rom
+/1Cor
+/2Cor
+/Gal
+/Eph
+/Phil
+/Col
+/1Thess
+/2Thess
+/1Tim
+/2Tim
+/Titus
+/Phlm
+/Heb
+/Jas
+/1Pet
+/2Pet
+/1John
+/2John
+/3John
+/Jude
+/Rev
+
+The search logic, supported symbols (`+`, `|`, `*`, `?`), retrieval and display all are same as how /search skill works, but for each book only.
+
+For example, we use the same examples used above, but /search searches the whole bible, /Matt , for example, search the book of Matthew ONLY.
+
+/Matt love*God # search in NET.bible as default
+
+when a `+` sign is used to search for word combination, it means `AND` regardless of sequence.
+
+e.g. /Matt love*God # means love, followed by God, with `*` as wildcard character
+
+/Matt love+God+Jesus # means love AND God AND Jesus, regardless of sequence
+
+when a `|` sign is used to search for multiple words or phrases, it means `OR`
+
+e.g. /Matt Holy Spirit|the Spirit|Spirit of God # means Holy Spirit OR the Spirit OR Spirit of God
+
+the search can be very complex, e.g.
+
+/Matt love+God|sin # means love AND God OR sin
+
+To specify search version(s), e.g.
+
+/Matt NET love*God
+
+/Matt NET KJV love*God
+
 ## Prompt for Creating Commentary Skill and /commentary Command
 
 ```
@@ -147,12 +367,4 @@ examples for use:
 Make the markdown display for version comparison better, for each verse with each version, make sure the whole version content for a single verse is displayed on a single line.  For example, you may consider prefix each version with `\n- `.  I think this is already in place in the bible skill.
 
 Update the root README.md file and the files in docs directory to reflect the new skills.
-```
-
-```
-Should you further improve the bible skill?  Right now, verse comparison like:
-
-John 3:16 [NET] For this is the way God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life. [CUV] 「上帝愛世人，甚至將他的獨生子賜給〔他們〕，叫一切信他的，不致滅亡，反得永生。 [OHGBI] ΟὕτωςThus γὰρfor ἠγάπησενloved ὁ- ΘεὸςGod τὸνthe κόσμονworld, ὥστεthat τὸνthe ΥἱὸνSon, τὸνthe μονογενῆonly begotten, ἔδωκενHe gave, ἵναso that πᾶςeveryone ὁ- πιστεύωνbelieving εἰςin αὐτὸνHim μὴnot ἀπόληταιshould perish, ἀλλ᾽but ἔχῃshould have ζωὴνlife αἰώνιονeternal. ...
-
-The markdown display show all different versions for a single verse on a single line, which makes uers different to read.  Can you make the markdown display for version comparison better, with each version display on a single line.  For example, you may consider prefix each version with `\n* ` or `\n- ` or better alternatives?
 ```
