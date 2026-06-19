@@ -1,6 +1,6 @@
 # Slash Commands & Workflows Reference Guide
 
-This guide details all 109 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
+This guide details all 110 custom slash commands (workflows) available in the **Antigravity Bible Study Agents** ecosystem, categorized by their study focus.
 
 ---
 
@@ -16,6 +16,7 @@ These commands focus on original languages, structural analysis, and the logical
 | **`/insights`** | Provides exegetical, literary, and spiritual insights on a passage. | Oxford Bible Scholar | A bible passage | `/insights Galatians 2:20` |
 | **`/flow`** | Traces the author's logical argument and thought progression. | Oxford Bible Scholar | A bible passage or chapter | `/flow Hebrews 1` |
 | **`/outline`** | Generates a highly detailed structural outline of a passage or book. | Oxford Bible Scholar | A bible book or passage | `/outline Colossians` |
+| **`/morphology`** | Retrieves word-by-word grammar and morphology data, with optional keyword or phrase filtering. | Verse Scripter | A bible reference(s) with optional keyword filtering | `/morphology love the world in John 3:16` |
 
 ---
 

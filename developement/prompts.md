@@ -430,5 +430,50 @@ as mentioned, commentaries are in sqlite format, stored either in `~/biblemate/d
 as mentioned, lexicon contents are in sqlite format, stored either in `~/biblemate/data/lexicons` or `~/biblemate/data_custom/lexicons`
 
 Note: make sure you don't hardcode available versions.  Instead of hardcoding a static version list, you should always check afresh the available versions in the mentioned folders.  Each folder has its own list of versions.  so you need to check both folders.
+```
 
+## Prompt for Creating Morphology Skill and /morphology Command
+
+```
+Create a new skill and a new slash command / workflow, to retrieve bible morphology data:
+
+skill name should be simply `morphology`
+
+slash command should be simply `/morphology`
+
+sqlite database is located at `~/biblemate/data/morphology.sqlite`
+
+works mainly on the table `morphology` in the sqlite file for morphology data
+
+though you may work with all columns, results mainly shows: 
+
+Verse Reference in readable format (Book Chapter:Verse), WordID, Word, LexicalEntry, MorphologyCode, Morphology, Lexeme, Transliteration, Pronunciation, Interlinear, Translation, Gloss
+
+1. Works with bible references
+
+/morphology accepts bible reference(s), single or multiple, and can be separated by ;
+
+examples for use:
+
+/morphology John 3:16 # retrieve morphology data for John 3:16
+
+/morphology John 3:16-18 # retrieve morphology data for John 3:16-18
+
+/morphology John 3:16-18; Deut 6:4; Rom 5-8 # retrieve morphology data for John 3:16-18; Deut 6:4; Rom 5-8
+
+2. Works with specific word(s) or phrases
+
+/morphology also support queries with specific word(s) or phrases, to limit the scope in particular verses.
+
+In this case, users have to specify the verse range(s) along with the word(s) or phrases.
+
+examples for use:
+
+/morphology create in Genesis 1:1
+
+/morphology love the world in John 3:16
+
+Important for your reasoning: The words or phrases provided by users may not exactly match the words in the morphology data rows, you should try your best to match in a reasonable way. Retrieve the best relevant data for results.
+
+If the queries and bible references does not make sense at all, clarify with user and ask for clarification.
 ```
