@@ -1,4 +1,50 @@
-# prompts for developing the commentary skill
+# Prompts for Development
+
+## Prompt for Creating Bible Skill and /bible Command
+
+```
+Create a new skill and a new slash command / workflow, to retrieve bible verses:
+
+skill name should be simply bible
+
+slash command should be simply /bible
+
+bible databases are in sqlite format, stored either in ~/biblemate/data/bibles or ~/biblemate/data_custom/bibles
+
+Remember use home variable instead of hardcoding absolute paths, to make this repository portable.
+
+Valid bible database filenames are ended with *.bible
+
+retrieve from table `Verses`
+
+NET.bible is the default bible if no bible version is specified
+
+the command `/bible` can take both bible version(s) and bible reference(s)
+
+if bible version is not specified, NET.bible is the default database for retrieval.  If a specified version, use that version, If more than one version is specified, all specified versions are retrieved with each verse display line by line comparison of the specified versions.
+
+bible references can be single or multiple verse(s), e.g. John 3:16-18; Rm 5-8
+
+bible references can also be a chapter a verse or multiple verse range
+
+examples for use: 
+
+/bible John 3:16 # use NET.bible as default
+
+/bible John 3 # retrieve the whole chapter from the first verse to the last
+
+/bible John 3:16-18; Deut 6:4; Rom 5-8 # retrieve multiple verses from different books.
+
+/bible CUV John 3:16-18 # use CUV.bible as it is specified
+
+/bible NET CUV John 3:16-18 # compare NET CUV every single verse, line by line, from John 3:16 to 3:18
+
+make sure you don't hardcode bible version list available in ~/biblemate/data/bibles and ~/biblemate/data_custom/bibles , as users can dynamatically add or remove bible databases into or from this folder.  Instead of hardcoding a static bible version list, you should always check if bible version specified is a valid name in those folder.
+```
+
+
+
+## Prompt for Creating Commentary Skill and /commentary Command
 
 ```
 Now, along a similar line, create a new skill and a new slash command workflow, to retrieve bible commentary:

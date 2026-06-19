@@ -297,7 +297,7 @@ def main():
                 ref_output.append(f"**{current_book_name} {ch}:{vs}**")
                 for ver in versions:
                     text = coords_map[(ch, vs)].get(ver, "(Verse not found)")
-                    ref_output.append(f"[{ver}] {text}")
+                    ref_output.append(f"- **[{ver}]** {text}")
                 ref_output.append("")
                 
         output_parts.append("\n".join(ref_output).strip())
