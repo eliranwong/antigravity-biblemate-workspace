@@ -1,10 +1,34 @@
-# Antigravity Bible Study Agents
+# Antigravity BibleMate Workspace
 
-Welcome to the **Antigravity Bible Study Agents** ecosystem. This repository is configured specifically as a local workspace extension for the **Google Antigravity** agentic development platform, featuring an integrated team of 9 customized agent personas, 110 standalone exegesis/theology skills, and 110 custom slash commands.
+> [!NOTE]
+> **Where Rigorous Scholarship Meets Agentic Power:** This repository unites the advanced agentic workflow capability of the **Google Antigravity Platform** with the reliable, time-tested databases of the **[UniqueBible Project](https://github.com/eliranwong/UniqueBible)** and the modular AI exegesis tools of **[BibleMate](https://github.com/eliranwong/biblemate)**.
 
-This repository works with all antigravity platform, Antigravity, Antigravity IDE, Antigravity CLI. Official downloads at: https://antigravity.google/download
+Welcome to the **Antigravity BibleMate Workspace**, a state-of-the-art local agentic study suite configured specifically as an extension for the **Google Antigravity** development platform (compatible with the Antigravity CLI, IDE, and platform). It features an integrated team of 9 customized study personas, 110 standalone exegesis and theology skills, and 110 custom slash commands.
+
+Whether you are a **pastor preparing a sermon**, a **bible content writer drafting articles**, a **theology student researching ancient manuscripts**, or a **believer deepening your study of the scriptures**, this workspace provides a unified, local-first environment where writing, AI agent assistance, and scholarly databases reside side-by-side in your IDE.
+
+Official Antigravity downloads at: https://antigravity.google/download
 
 ---
+
+## 🌟 Key Selling Points & Synergy
+
+This project is the intersection of three powerful domains:
+
+### 1. Reliable Databases (UniqueBible)
+Unlike standard AI workflows that suffer from hallucinations when quoting, translating, or parsing scripture, this workspace relies directly on the SQLite database files developed and refined for over a decade in the **[UniqueBible project](https://github.com/eliranwong/UniqueBible)**. Bibles, commentaries, lexicons, morphology codes, and cross-references are queried locally at runtime, providing an unwavering, solid foundation of truth.
+
+### 2. Intelligent Exegesis (BibleMate AI)
+By integrating the tools and retrievers of **[BibleMate AI](https://github.com/eliranwong/biblemate)**, the agent team can dynamically locate words, compare translations, analyze Greek and Hebrew root words, extract commentaries, and track down cross-references instantly.
+
+### 3. Integrated Developer Environment (Google Antigravity)
+Leveraging the **Google Antigravity platform**, these tools are exposed natively in your developer environment:
+* **Zero Registration**: Simply open this workspace to register the entire team of agents, exegesis skills, and custom slash commands.
+* **Inline Composition**: Write your study guides, sermons, or articles in the IDE while conversing with specialized agents in the side panel.
+* **Slash Commands**: Execute complex workflows (e.g. `/sermon Romans 8:28` or `/translate_greek John 1:1`) with simple, parameterized commands.
+
+---
+
 
 ## Directory Structure
 
