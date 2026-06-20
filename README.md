@@ -32,7 +32,7 @@ graph TD
     Phase0 --> Plan[Master Study Plan Generated & Validated]
     
     Plan --> Phase1[Phase 1: Local Data Retrieval]
-    subgraph Phase 1: Data (Oxford Scholar)
+    subgraph Phase1_Sub ["Phase 1: Data (Oxford Scholar)"]
         Phase1 --> Db1[(Bible Texts)]
         Phase1 --> Db2[(Greek/Hebrew Original)]
         Phase1 --> Db3[(Commentaries)]
@@ -41,7 +41,7 @@ graph TD
     end
     
     Db1 & Db2 & Db3 & Db4 & Db5 --> Phase2[Phase 2: Analysis & Exegesis]
-    subgraph Phase 2: Exegesis (Oxford Scholar)
+    subgraph Phase2_Sub ["Phase 2: Exegesis (Oxford Scholar)"]
         Phase2 --> Outline[Structural Outline]
         Phase2 --> Keywords[Word Study]
         Phase2 --> Context[Historical/Cultural Context]
@@ -49,21 +49,21 @@ graph TD
     end
     
     Outline & Keywords & Context & Flow --> Phase3[Phase 3: Theological Synthesis]
-    subgraph Phase 3: Theology (Cambridge Theologian)
+    subgraph Phase3_Sub ["Phase 3: Theology (Cambridge Theologian)"]
         Phase3 --> Themes[Doctrinal Mapping]
         Phase3 --> Systematic[Systematic Soteriology]
         Phase3 --> Canon[Canonical Narrative Fit]
     end
     
     Themes & Systematic & Canon --> Phase4[Phase 4: Devotion & Application]
-    subgraph Phase 4: Heart (Billy Graham & Compassionate Pastor)
+    subgraph Phase4_Sub ["Phase 4: Heart (Billy Graham & Compassionate Pastor)"]
         Phase4 --> Devotion[Devotional Reflection]
         Phase4 --> Application[Practical Action Steps]
         Phase4 --> Prayer[Heartfelt Scriptural Prayer]
     end
     
     Devotion & Application & Prayer --> Phase5[Phase 5: Synthesis & Sync]
-    subgraph Phase 5: Report (Content Interpreter)
+    subgraph Phase5_Sub ["Phase 5: Report (Content Interpreter)"]
         Phase5 --> FinalReport[Unified Final Report]
         Phase5 --> QualScore[Quality Score Check - 100/100]
         Phase5 --> GitSync[Git Sync & Push]
