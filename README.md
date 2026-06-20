@@ -185,10 +185,19 @@ If you wish to bring these custom Bible study agents and tools into a **differen
 1. **Copy Configuration & Preferences (Choose one method)**:
    - **Method A - Git users (Recommended)**: **Fork** this repository on GitHub and `git clone` it. This is highly recommended because when you write your own studies, generate exports, and run the `/sync` command, all changes will be synchronized cleanly to your own personal remote repository.
    - **Method B - Manual Copy (Zip File)**: Download [manual_setup.zip](https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip) into the root of your new project and extract it:
-      * **Via Terminal (Recommended)**: Run this command in your project root to download, extract, and clean up:
-        ```bash
-        curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip manual_setup.zip && rm manual_setup.zip
-        ```
+      * **Via Terminal (Recommended)**: Run the command for your operating system in your project root to download, extract, and clean up:
+        * **macOS / Linux**:
+          ```bash
+          curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip manual_setup.zip && rm manual_setup.zip
+          ```
+        * **Windows (PowerShell)**:
+          ```powershell
+          Invoke-WebRequest -Uri "https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip" -OutFile "manual_setup.zip"; Expand-Archive -Path "manual_setup.zip" -DestinationPath "." -Force; Remove-Item -Path "manual_setup.zip"
+          ```
+        * **Windows (Command Prompt)**:
+          ```cmd
+          curl.exe -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && tar -xf manual_setup.zip && del manual_setup.zip
+          ```
       * **Via GUI (Double-Click)**: If you extract using double-click on macOS, the OS will wrap the contents in a `manual_setup` folder. Simply move the `.agents/` and `preferences/` folders out of it and into your project root.
       *(You can generate or regenerate this zip file at any time by running the `/zip` command).*
    - **Method C - Manual Copy (Folders)**: Manually copy the `.agents/` and `preferences/` folders from the root of this repository into the root of your new project. Google Antigravity will automatically discover the custom personas, skills, and workflows, while the `preferences/` folder preserves your default database preferences.
