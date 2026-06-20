@@ -13,9 +13,27 @@ Official Antigravity downloads at: https://antigravity.google/download
 
 ---
 
-## 🚀 The `/biblemate` Super-Skill: Orchestrated Bible Study
+## 🌟 Key Selling Points & Synergy
 
-The `/biblemate` command (backed by the [.agents/skills/biblemate](.agents/skills/biblemate) orchestration suite) is the **super-skill** of this project. While individual slash commands perform specific exegesis tasks (like outline lookups or keyword analyses), `/biblemate` acts as a first-class Biblical scholar and orchestrator, running a fully automated, multi-phase research pipeline to produce publication-quality, deep-dive manuscripts.
+This project is the intersection of three powerful domains:
+
+### 1. Reliable Databases (UniqueBible)
+Unlike standard AI workflows that suffer from hallucinations when quoting, translating, or parsing scripture, this workspace relies directly on the SQLite database files developed and refined for over a decade in the **[UniqueBible project](https://github.com/eliranwong/UniqueBible)**. Bibles, commentaries, lexicons, morphology codes, and cross-references are queried locally at runtime, providing an unwavering, solid foundation of truth.
+
+### 2. Intelligent Exegesis (BibleMate AI)
+By integrating the tools and retrievers of **[BibleMate AI](https://github.com/eliranwong/biblemate)**, the agent team can dynamically locate words, compare translations, analyze Greek and Hebrew root words, extract commentaries, and track down cross-references instantly.
+
+### 3. Integrated Developer Environment (Google Antigravity)
+Leveraging the **Google Antigravity platform**, these tools are exposed natively in your developer environment:
+* **Automatic Workspace Loading**: Simply open this workspace, and Antigravity will automatically load and register the entire team of agents, exegesis skills, and custom slash commands.
+* **Inline Composition**: Write your study guides, sermons, or articles in the IDE while conversing with specialized agents in the side panel.
+* **Slash Commands**: Execute complex workflows (e.g. `/sermon Romans 8:28` or `/translate-greek John 1:1`) with simple, parameterized commands.
+
+---
+
+## 🚀 The `/biblemate` Signature-Skill: Orchestrated Bible Study
+
+The `/biblemate` command (backed by the [.agents/skills/biblemate](.agents/skills/biblemate) orchestration suite) is the **signature-skill** of this project. While individual slash commands perform specific exegesis tasks (like outline lookups or keyword analyses), `/biblemate` acts as a first-class Biblical scholar and orchestrator, running a fully automated, multi-phase research pipeline to produce publication-quality, deep-dive manuscripts.
 
 ### Why it is so powerful for Bible Study:
 * **Phased Workflow**: It guides the AI assistant through 5 rigorous research phases—Planning, local database Data Retrieval, Analysis, Theological Synthesis, and pastoral/evangelistic Application.
@@ -106,26 +124,6 @@ While `/biblemate` follows a preset, structured 6-phase framework, `/biblemate-s
 * 🔍 **Flexible Plan Validation**: Validation checks verify that the dynamic plan contains a structured checklist with essential categories covered (Scripture Retrieval, Exegesis, Theology, and Application) rather than enforcing rigid tool inventories.
 
 ---
-
-## 🌟 Key Selling Points & Synergy
-
-This project is the intersection of three powerful domains:
-
-### 1. Reliable Databases (UniqueBible)
-Unlike standard AI workflows that suffer from hallucinations when quoting, translating, or parsing scripture, this workspace relies directly on the SQLite database files developed and refined for over a decade in the **[UniqueBible project](https://github.com/eliranwong/UniqueBible)**. Bibles, commentaries, lexicons, morphology codes, and cross-references are queried locally at runtime, providing an unwavering, solid foundation of truth.
-
-### 2. Intelligent Exegesis (BibleMate AI)
-By integrating the tools and retrievers of **[BibleMate AI](https://github.com/eliranwong/biblemate)**, the agent team can dynamically locate words, compare translations, analyze Greek and Hebrew root words, extract commentaries, and track down cross-references instantly.
-
-### 3. Integrated Developer Environment (Google Antigravity)
-Leveraging the **Google Antigravity platform**, these tools are exposed natively in your developer environment:
-* **Automatic Workspace Loading**: Simply open this workspace, and Antigravity will automatically load and register the entire team of agents, exegesis skills, and custom slash commands.
-* **Inline Composition**: Write your study guides, sermons, or articles in the IDE while conversing with specialized agents in the side panel.
-* **Slash Commands**: Execute complex workflows (e.g. `/sermon Romans 8:28` or `/translate-greek John 1:1`) with simple, parameterized commands.
-
-
----
-
 
 ## Directory Structure
 
