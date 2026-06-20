@@ -96,3 +96,24 @@ The only human interaction you may seek is to clarify with the user only if you 
 ### sync
 
 Run the sync skill to upload all the changes to the remot repository if the current repository is a git repository and has a remote origin set.  Otherwise, do nothing.
+
+
+
+# Follow-up
+
+Re the `biblemate` skill, I identified an issue.  The so called final report is not the final response I want.  The final report you generated is like a pre-final overview, reviewing individual outputs that are relevant to my request.  I do like that so keep it.  However, you should not finish there, as I expect the real `final` response is a comprehensive well-written and unified writting that integrates all the detailed findings in all the study outputs, to have a single piece of detailed answer to my original response.  For example, if users original request is to have a deep research on a particular topics, the pre-final overview is like gathering from the study outputs that are relevant, and prepare for the final dissertation as a direct and detailed answer to my original request, rather than telling me what have been done, with some points here and there.
+
+Here is an example that you generated [2026-06-20-13-45-13_joshua_3_beyond_the_beginning_sermon_study](biblemate/2026-06-20-13-45-13_joshua_3_beyond_the_beginning_sermon_study)
+
+The file [014-final_report.md](biblemate/2026-06-20-13-45-13_joshua_3_beyond_the_beginning_sermon_study/014-final_report.md) is like a pre-final overview to me.  My original request was to ask you to write a sermon, so in the final response, it should be a comprehensive sermons with all the details from study outputs integrated, all together give me a direct and unified answer, should be comprehensive enough even I don't refer  to indidivdual outputs.
+
+Please improve the biblemate skill and workflow:
+
+1.
+Upon completion of individual study outputs after all phrases completed, there should be both a pre-final overview and a final response.  Like the case in [2026-06-20-13-45-13_joshua_3_beyond_the_beginning_sermon_study](biblemate/2026-06-20-13-45-13_joshua_3_beyond_the_beginning_sermon_study) there should be 014-pre-final_overview and 015-final_response.
+
+2. You should add a seasoned and professional writer persona in [agents.md](.agents/agents.md) , with special expertise for the final biblical writing, capable of navigating and integrating different bible study outputs.
+
+3. It is so often AI writes things so think and so shallow because it writes in a single go.  But when humans writes, we write a draft first, then step by step weaving and integrating different study outputs, step by step, then revising and improving the writing again and again in a loop until the final writing is perfect.  I want you to implement this writing, integrating, audit, revising loop until all are perfect for the final response to be delivered.  can you do that?
+
+Please try your best to improve the `biblemate` skill with the instructions above, and also anything that you think you can further improve.

@@ -8,7 +8,7 @@ description: Orchestrate the entire BibleMate AI study workflow dynamically usin
 ## Overview
 This skill dynamically orchestrates complex, multi-step Bible study requests. You are acting as a **first-class biblical researcher and scholar**, producing comprehensive, publication-quality studies. A shallow or stub output is a failure.
 
-This skill discovers available skills at runtime, refines the study request, creates a timestamped study folder, generates a Master Study Plan, executes the steps (saving outputs to individual files), performs quality control audits at every stage, produces a comprehensive final report, and syncs changes to a remote repository if configured.
+This skill discovers available skills at runtime, refines the study request, creates a timestamped study folder, generates a Master Study Plan, executes the steps (saving outputs to individual files), performs quality control audits at every stage, produces a pre-final overview, and then runs an iterative Draft→Integrate→Audit→Revise writing loop to produce a comprehensive, standalone final response that directly answers the user's original request. Changes are synced to a remote repository if configured.
 
 > **Universal Scripture Rule**: Every Scripture verse quoted in any step MUST be retrieved using the `bible` skill. Never quote from memory.
 
@@ -22,7 +22,9 @@ The python orchestrator script is located at `.agents/skills/biblemate/biblemate
 | `--init "<request>" "<title>"` | Initialize a study | Creates timestamped folder and `000-request_and_study_plan.md` |
 | `--update-plan "<folder>" "<plan>"` | Update the Master Plan | Overwrites the plan file with updated content |
 | `--save-step "<folder>" "<step>" "<skill>" "<content>" [--sub-skill "<sub>"]` | Save step output | Creates `NNN-skill_name.md` files |
-| `--save-report "<folder>" "<last_step>" "<report>"` | Save final report | Creates `NNN-final_report.md` |
+| `--save-overview "<folder>" "<step>" "<content>"` | Save pre-final overview | Creates `NNN-pre_final_overview.md` |
+| `--save-final-response "<folder>" "<step>" "<content>"` | Save final response | Creates `NNN-final_response.md` and marks completion |
+| `--save-report "<folder>" "<last_step>" "<report>"` | *(Deprecated)* | Use `--save-overview` + `--save-final-response` instead |
 | `--status "<folder>"` | Check study progress | Reports completion %, file sizes, and pending steps |
 | `--validate-plan "<folder>" "<study_type>"` | Validate plan coverage | Checks plan against minimum skill requirements |
 | `--quality-score "<folder>"` | Compute quality metrics | Returns skill coverage, depth, and citation count |
@@ -108,21 +110,97 @@ These skills synthesize the analytical work into theological understanding:
 
 **After completing this phase**: Save outputs. Audit that devotions are substantial (not 5-line stubs), applications are specific and actionable, and prayers incorporate actual Scripture text retrieved via the `bible` skill.
 
-### Phase 5: Final Report & Sync
+### Phase 5: Pre-Final Overview & Synthesis Audit (Adopt **Biblical Content Interpreter** persona)
 
-1. **Generate Report Template**: Run `--generate-report-template` to get the skeleton for the study type.
-2. **Compile Comprehensive Final Report**: The final report is NOT a link index. It must be a **detailed, integrated synthesis** that:
-   - Has a table of contents with clear headings
-   - Weaves together findings from ALL phases into a unified narrative
-   - Includes inline Scripture quotes (retrieved via `bible` skill)
-   - Contains the full devotional, application, and prayer content
-   - Provides inline references to individual step files for deeper detail (e.g., "For the complete word study, see [003-keywords.md]")
-   - Is well-formatted with proper markdown: headings, blockquotes for Scripture, tables where appropriate
-   - Reads as a complete, standalone document that fully answers the original request
-3. **Run Quality Score**: Use `--quality-score` to verify study quality metrics.
-4. **Save Final Report**: Use `--save-report`.
-5. **Save Study Metadata**: The orchestrator automatically generates `study_metadata.json`.
-6. **Sync to Git**: Run `--git-sync` (or the `sync` skill) to push all changes if git is configured.
+The pre-final overview is a structured research brief that surveys all study outputs and prepares the ground for the final response. It is **NOT** the final deliverable — it is a bridge between the study work and the final writing.
+
+1. **Survey All Outputs**: Read through every study output file from Phases 1–4. For each, extract the most important findings, key insights, pivotal Scripture texts, and standout commentary observations.
+2. **Map to Original Request**: Identify which study outputs are most relevant to the user's original request. Note which findings directly answer the request and which provide supporting depth.
+3. **Identify Gaps**: Flag any areas where the study outputs do not sufficiently address the user's request. If critical gaps exist, go back and run additional skills before proceeding.
+4. **Compile Overview Document**: Write the pre-final overview as a structured brief with:
+   - **Original Request Recap**: What the user asked for
+   - **Key Findings Summary**: The most important discoveries from each phase, organized thematically
+   - **Content Map**: Which study output files contribute to which sections of the planned final response
+   - **Strength Assessment**: What the study does well
+   - **Gap Analysis**: What is missing or thin
+   - **References to Individual Outputs**: Links to each step file (e.g., `[005-keywords.md](005-keywords.md)`) for detailed reference
+5. **Run Quality Score**: Use `--quality-score` to verify study quality metrics before proceeding to the final writing phase.
+6. **Save Pre-Final Overview**: Use `--save-overview` to save as `NNN-pre_final_overview.md`.
+
+### Phase 6: Final Response — Iterative Writing & Refinement (Adopt **Master Biblical Writer** persona)
+
+This is the most critical phase. The final response is the **actual deliverable** — a comprehensive, standalone document that directly and thoroughly answers the user's original request. It must be self-contained: a reader should never need to consult individual study output files.
+
+**The Write→Integrate→Audit→Revise Loop:**
+
+#### Step 1: Draft
+Write a comprehensive first draft that directly answers the user's original request. Structure it according to the deliverable type:
+- **Sermon**: Full manuscript with introduction, main points with sub-points, illustrations, transitions, application, invitation/altar call, and closing prayer
+- **Passage Study**: Introduction, text presentation, exegetical analysis, theological significance, application, and devotional reflection
+- **Topical Study**: Definition, biblical survey (OT → NT), key word analysis, theological themes, contemporary application, and conclusion
+- **Book Study**: Introduction, background, structural overview, major themes, key passages explored, and enduring message
+
+The draft should be substantial and well-structured, but need not yet incorporate every detail from the study outputs. It establishes the skeleton and core argument.
+
+#### Step 2: Integrate (Multi-Pass Weaving)
+Systematically go through the study outputs and weave their specific findings into the draft. Each pass focuses on a different layer of enrichment:
+
+- **Pass 1 — Original Language & Keywords**: Weave in Hebrew/Greek word studies, morphological insights, transliterations, and semantic range observations from the `keywords`, `original`, `interlinear`, `morphology`, and `lexicon` outputs.
+- **Pass 2 — Commentary & Cross-References**: Integrate specific commentary observations (with attribution) and cross-reference connections from the `commentary` and `xrefs` outputs. Add the voices of published scholars.
+- **Pass 3 — Theological Themes & Canonical Context**: Deepen the theological argumentation using findings from `themes`, `theology`, `meaning`, `canon`, and `insights` outputs. Ensure the passage is connected to the broader redemptive narrative.
+- **Pass 4 — Application, Devotion & Prayer**: Enrich practical application sections, devotional reflections, and prayers using `application`, `devotion`, `prayer`, and `questions` outputs. Ensure applications are specific and actionable, not generic.
+- **Pass 5 — Supplementary Content**: Integrate any remaining study-specific content: discussion questions for sermons, character studies, location insights, flow analysis, etc.
+
+After each pass, briefly verify that the new content integrates naturally with existing prose — no abrupt insertions or patchwork seams.
+
+#### Step 3: Audit
+Critically review the integrated draft against these quality criteria:
+
+| Criterion | Question |
+|-----------|----------|
+| **Completeness** | Does it comprehensively answer the original user request? |
+| **Depth** | Is every major finding from the study outputs represented? |
+| **Scripture Accuracy** | Are all Scripture quotes accurate and properly cited? Retrieved via `bible` skill? |
+| **Unity** | Does it read as a unified document, not a patchwork of disconnected sections? |
+| **Flow** | Are transitions smooth between sections? Does the argument build logically? |
+| **Voice** | Is the tone consistent and appropriate for the deliverable type? |
+| **Substance** | Is the content publication-quality in depth, or are there shallow/thin sections? |
+| **Faithfulness** | Is the theological content faithful to Scripture and orthodox? |
+| **Self-Containment** | Can a reader fully understand the content without consulting individual study files? |
+
+Record specific issues found during the audit (e.g., "Section 3 is thin on application", "Transition between points 2 and 3 is abrupt", "Missing cross-reference to Romans 6 in sanctification section").
+
+#### Step 4: Revise
+Address every issue identified in the audit:
+- Strengthen weak or shallow sections with additional content from study outputs
+- Smooth abrupt transitions with connecting sentences or paragraphs
+- Deepen theological arguments where the audit flagged superficiality
+- Ensure rhetorical coherence — each section should build on the previous
+- Remove redundancy while preserving depth
+- Verify all Scripture quotes are complete and accurately cited
+
+#### Step 5: Loop
+Repeat Steps 3–4 (Audit→Revise) until the writing meets all quality criteria:
+- **Minimum**: 2 audit-revise cycles (the first draft is never good enough)
+- **Maximum**: 4 cycles (to prevent infinite loops)
+- **Exit condition**: The audit finds no major issues — only minor polish items remain
+
+#### Step 6: Final Quality Gate
+Before saving, verify the final response meets these absolute requirements:
+1. ✅ It is a **complete standalone document** that fully answers the original request
+2. ✅ It does **NOT reference individual study output files** (those are in the overview)
+3. ✅ It includes **inline Scripture text** retrieved via the `bible` skill
+4. ✅ It is **publication-quality** in structure, depth, and prose
+5. ✅ It is **at least 3× the length** of the pre-final overview (measured in characters)
+6. ✅ The content is **theologically faithful** and grounded in Scripture
+
+#### Step 7: Save
+Use `--save-final-response` to save the final deliverable as `NNN-final_response.md`.
+
+### Phase 7: Sync
+
+1. **Save Study Metadata**: The orchestrator automatically generates `study_metadata.json`.
+2. **Sync to Git**: Run `--git-sync` (or the `sync` skill) to push all changes if git is configured.
 
 ---
 
@@ -252,7 +330,9 @@ Leverage the personas defined in `.agents/agents.md` for different phases. Each 
 | Phase 2 (Analysis) | *Oxford Bible Scholar* | Historical-grammatical exegesis expertise |
 | Phase 3 (Theology) | *Cambridge Theologian* | Systematic and biblical theology depth |
 | Phase 4 (Application) | *Billy Graham* (devotion/application) / *Compassionate Pastor* (prayer) | Heart-level warmth and gospel clarity |
-| Phase 5 (Final Report) | *Biblical Content Interpreter* | Integration of all perspectives |
+| Phase 5 (Pre-Final Overview) | *Biblical Content Interpreter* | Broad integration, gap analysis, content mapping |
+| Phase 6 (Final Response) | *Master Biblical Writer* | Publication-quality iterative writing and refinement |
+| Phase 7 (Sync) | *Default* | File management and git operations |
 
 When executing each phase, adopt the corresponding persona's tone, vocabulary, and analytical approach as described in the agents file.
 
@@ -277,12 +357,21 @@ After completing all steps in a phase:
 4. Record quality observations in the plan file.
 
 ### Final Report Quality Gate
-Before saving the final report:
-1. It must be a **detailed synthesis**, not a summary of links.
-2. It must integrate findings across all phases into a unified narrative.
-3. It must include inline Scripture text (not just references).
-4. It must be well-structured with table of contents, clear headings, and proper formatting.
-5. Run `--quality-score` and verify acceptable metrics.
+Before saving the pre-final overview:
+1. It must comprehensively survey all study outputs and map them to the original request.
+2. It must identify gaps and strengths in the study body.
+3. It must provide clear guidance for the final writing phase.
+4. Run `--quality-score` and verify acceptable metrics.
+
+### Final Response Quality Gate
+Before saving the final response:
+1. It must be a **comprehensive, standalone document** that directly answers the original request — not a summary of links or study outputs.
+2. It must integrate findings from all phases into a unified narrative with a single consistent voice.
+3. It must include inline Scripture text (not just references), all retrieved via the `bible` skill.
+4. It must be well-structured with proper markdown: headings, blockquotes for Scripture, tables where appropriate.
+5. It must have gone through at least 2 audit-revise cycles.
+6. It must be at least 3× the character length of the pre-final overview.
+7. It must **NOT** reference individual study output files — all content is woven directly into the prose.
 
 ---
 
@@ -293,7 +382,8 @@ Each phase builds on the previous. Explicitly pass relevant context forward:
 - **Phase 1 → Phase 2**: Provide original language text and morphology data when running `keywords`. Provide cross-references when running context analysis.
 - **Phase 2 → Phase 3**: Feed keyword insights, structural outline, and historical context into theological theme analysis.
 - **Phase 3 → Phase 4**: Ground applications and devotions in specific theological findings. Reference actual exegetical discoveries, not generic platitudes.
-- **All Phases → Phase 5**: The final report synthesizes everything. Reference specific findings from each step with inline links.
+- **Phases 1–4 → Phase 5**: The pre-final overview surveys all outputs, maps them to the original request, and identifies gaps.
+- **Phases 1–5 → Phase 6**: The final response integrates everything from all study outputs through the iterative writing loop. The pre-final overview serves as the integration roadmap.
 
 ---
 
@@ -303,6 +393,6 @@ Each phase builds on the previous. Explicitly pass relevant context forward:
 2. **Scripture Integrity**: Every Bible verse quoted MUST be retrieved using the `bible` skill from local databases. Never quote from memory.
 3. **Living Plan**: The Master Study Plan is a living document. Update it as the study progresses and new insights emerge. You are a first-class researcher — deeper understanding may reveal new avenues.
 4. **Parallel Execution**: Run independent skills in parallel where possible (e.g., all Phase 1 data retrieval skills). Run dependent skills in series (e.g., `keywords` depends on `original` and `morphology` output).
-5. **No Shallow Output**: Every step output should be substantial and thorough. If a skill produces a thin result, investigate why and enhance it. A 6-line devotion or a 27-line final report is unacceptable.
-6. **File Naming & Portability**: Follow the `NNN-skill_name.md` convention strictly. Sub-skills use `NNN-skill_name-sub_skill.md`. All links between files MUST be relative (e.g., `[014-insights.md](014-insights.md)`) and NEVER use absolute paths (e.g., `file:///Users/username/...`) to ensure that the repository remains portable across different devices and operating systems.
+5. **No Shallow Output**: Every step output should be substantial and thorough. If a skill produces a thin result, investigate why and enhance it. A 6-line devotion or a 27-line overview is unacceptable. The final response must be the most substantial document in the study.
+6. **File Naming & Portability**: Follow the `NNN-skill_name.md` convention strictly. Sub-skills use `NNN-skill_name-sub_skill.md`. The pre-final overview uses `NNN-pre_final_overview.md`. The final response uses `NNN-final_response.md`. All links between files MUST be relative (e.g., `[014-pre_final_overview.md](014-pre_final_overview.md)`) and NEVER use absolute paths (e.g., `file:///Users/username/...`) to ensure that the repository remains portable across different devices and operating systems.
 7. **Sync on Completion**: Always run `--git-sync` (or the `sync` skill) at the end if the repository has a remote origin.

@@ -478,7 +478,54 @@ def _update_metadata_step(folder_path, skill_name, content_len):
             pass  # Non-critical
 
 
+def save_overview(folder_path, step_number, content):
+    """Save the pre-final overview file (Phase 5 output)."""
+    if not os.path.exists(folder_path):
+        print(f"Error: Study folder does not exist at {folder_path}", file=sys.stderr)
+        sys.exit(1)
+
+    step_str = str(step_number).zfill(3)
+    filename = f"{step_str}-pre_final_overview.md"
+    filepath = os.path.join(folder_path, filename)
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(content)
+
+    _update_metadata_step(folder_path, "pre_final_overview", len(content))
+    print(f"SUCCESS_SAVE_OVERVIEW:{filepath}")
+
+
+def save_final_response(folder_path, step_number, content):
+    """Save the final response file (Phase 6 output) and mark study as complete."""
+    if not os.path.exists(folder_path):
+        print(f"Error: Study folder does not exist at {folder_path}", file=sys.stderr)
+        sys.exit(1)
+
+    step_str = str(step_number).zfill(3)
+    filename = f"{step_str}-final_response.md"
+    filepath = os.path.join(folder_path, filename)
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(content)
+
+    # Mark completion in metadata
+    metadata_path = os.path.join(folder_path, "study_metadata.json")
+    if os.path.exists(metadata_path):
+        try:
+            with open(metadata_path, "r", encoding="utf-8") as f:
+                metadata = json.load(f)
+            metadata["completed"] = datetime.datetime.now().isoformat()
+            metadata["total_output_bytes"] = metadata.get("total_output_bytes", 0) + len(content)
+            with open(metadata_path, "w", encoding="utf-8") as f:
+                json.dump(metadata, f, indent=2)
+        except Exception:
+            pass
+
+    print(f"SUCCESS_SAVE_FINAL_RESPONSE:{filepath}")
+
+
 def save_report(folder_path, last_step_number, content):
+    """DEPRECATED: Use save_overview + save_final_response instead."""
+    print("DEPRECATION WARNING: --save-report is deprecated. "
+          "Use --save-overview and --save-final-response instead.", file=sys.stderr)
     if not os.path.exists(folder_path):
         print(f"Error: Study folder does not exist at {folder_path}", file=sys.stderr)
         sys.exit(1)
@@ -518,8 +565,10 @@ def list_studies():
     for name in sorted(os.listdir(biblemate_dir)):
         study_path = os.path.join(biblemate_dir, name)
         if os.path.isdir(study_path) and not name.startswith("."):
-            # Check for final report
-            has_report = any(f.endswith("-final_report.md") for f in os.listdir(study_path))
+            # Check for final response (new) or final report (legacy)
+            study_files = os.listdir(study_path)
+            has_report = (any(f.endswith("-final_response.md") for f in study_files)
+                          or any(f.endswith("-final_report.md") for f in study_files))
             # Count step files
             step_files = [f for f in os.listdir(study_path) if re.match(r"\d{3}-", f) and f != "000-request_and_study_plan.md"]
             # Total size
@@ -567,13 +616,17 @@ def study_status(folder_path):
     files = sorted(os.listdir(folder_path))
     step_files = [f for f in files if re.match(r"\d{3}-", f) and f.endswith(".md") and f != "000-request_and_study_plan.md"]
     has_plan = "000-request_and_study_plan.md" in files
-    has_report = any(f.endswith("-final_report.md") for f in files)
+    has_overview = any(f.endswith("-pre_final_overview.md") for f in files)
+    has_final_response = any(f.endswith("-final_response.md") for f in files)
+    has_report = any(f.endswith("-final_report.md") for f in files)  # legacy
+    is_complete = has_final_response or has_report
     has_metadata = "study_metadata.json" in files
     
     print("# Study Progress Report\n")
     print(f"**Folder**: `{folder_path}`")
     print(f"**Plan File**: {'✅ Found' if has_plan else '❌ Missing'}")
-    print(f"**Final Report**: {'✅ Complete' if has_report else '🔄 Pending'}")
+    print(f"**Pre-Final Overview**: {'✅ Found' if has_overview else '⬜ Pending'}")
+    print(f"**Final Response**: {'✅ Complete' if has_final_response else ('📄 Legacy Report' if has_report else '🔄 Pending')}")
     print(f"**Metadata**: {'✅ Found' if has_metadata else '⚠️ Missing'}")
     print(f"**Step Files**: {len(step_files)}\n")
     
@@ -728,31 +781,57 @@ def quality_score(folder_path):
         except Exception:
             pass
     
-    has_report = any(f.endswith("-final_report.md") for f in files)
+    has_final_response = any(f.endswith("-final_response.md") for f in files)
+    has_overview = any(f.endswith("-pre_final_overview.md") for f in files)
+    has_report = any(f.endswith("-final_report.md") for f in files)  # legacy
+    is_complete = has_final_response or has_report
     
     # Compute score (0-100)
     score = 0
-    # Skills breadth (0-30 points)
-    score += min(30, len(skills_used) * 4)
-    # Content depth (0-25 points, based on total output)
+    # Skills breadth (0-25 points)
+    score += min(25, len(skills_used) * 3)
+    # Content depth (0-20 points, based on total output)
     if total_bytes > 20000:
-        score += 25
-    elif total_bytes > 10000:
         score += 20
+    elif total_bytes > 10000:
+        score += 16
     elif total_bytes > 5000:
-        score += 15
+        score += 12
     elif total_bytes > 2000:
-        score += 10
+        score += 8
     else:
-        score += 5
-    # Scripture citations (0-20 points)
-    score += min(20, scripture_citations * 2)
-    # Depth quality (0-15 points, penalize for thin outputs)
+        score += 4
+    # Scripture citations (0-15 points)
+    score += min(15, scripture_citations * 2)
+    # Depth quality (0-10 points, penalize for thin outputs)
     if len(step_files) > 0:
         thin_ratio = depth_warnings / len(step_files)
-        score += round(15 * (1 - thin_ratio))
-    # Final report (0-10 points)
-    if has_report:
+        score += round(10 * (1 - thin_ratio))
+    # Pre-final overview (0-5 points)
+    if has_overview:
+        overview_file = [f for f in files if f.endswith("-pre_final_overview.md")][0]
+        overview_size = os.path.getsize(os.path.join(folder_path, overview_file))
+        if overview_size > 3000:
+            score += 5
+        elif overview_size > 1000:
+            score += 3
+        else:
+            score += 1
+    # Final response (0-25 points — the most important deliverable)
+    if has_final_response:
+        response_file = [f for f in files if f.endswith("-final_response.md")][0]
+        response_size = os.path.getsize(os.path.join(folder_path, response_file))
+        if response_size > 15000:
+            score += 25
+        elif response_size > 10000:
+            score += 20
+        elif response_size > 5000:
+            score += 15
+        elif response_size > 2000:
+            score += 10
+        else:
+            score += 5
+    elif has_report:  # legacy fallback
         report_file = [f for f in files if f.endswith("-final_report.md")][0]
         report_size = os.path.getsize(os.path.join(folder_path, report_file))
         if report_size > 5000:
@@ -788,7 +867,8 @@ def quality_score(folder_path):
     print(f"| Step Files | {len(step_files)} |")
     print(f"| Scripture Citations | {scripture_citations} |")
     print(f"| Depth Warnings | {depth_warnings} |")
-    print(f"| Final Report | {'✅ Present' if has_report else '❌ Missing'} |")
+    print(f"| Pre-Final Overview | {'✅ Present' if has_overview else '❌ Missing'} |")
+    print(f"| Final Response | {'✅ Present' if has_final_response else ('📄 Legacy Report' if has_report else '❌ Missing')} |")
     
     # Save score to metadata
     metadata_path = os.path.join(folder_path, "study_metadata.json")
@@ -847,7 +927,9 @@ def resume_study(folder_path):
             step_num = int(match.group(1))
             max_step = max(max_step, step_num)
     
-    has_report = any(f.endswith("-final_report.md") for f in files)
+    has_final_response = any(f.endswith("-final_response.md") for f in files)
+    has_report = any(f.endswith("-final_report.md") for f in files)  # legacy
+    is_complete = has_final_response or has_report
     
     print(f"# Resume Study Report\n")
     print(f"**Folder**: `{folder_path}`")
@@ -855,7 +937,7 @@ def resume_study(folder_path):
     print(f"**In Progress**: {len(in_progress)}")
     print(f"**Pending**: {len(incomplete)}")
     print(f"**Last Step Number**: {max_step}")
-    print(f"**Final Report**: {'✅ Done' if has_report else '⬜ Not yet'}\n")
+    print(f"**Final Response**: {'✅ Done' if has_final_response else ('📄 Legacy Report' if has_report else '⬜ Not yet')}\n")
     
     if in_progress:
         print("## Resume From (In Progress):")
@@ -868,10 +950,10 @@ def resume_study(folder_path):
             print(f"  - ⬜ {item}")
     
     if not incomplete and not in_progress:
-        if has_report:
+        if is_complete:
             print("✅ Study appears to be fully complete!")
         else:
-            print("⚠️ All plan steps are complete but no final report found. Generate the final report.")
+            print("⚠️ All plan steps are complete but no final response found. Run Phase 5 (overview) and Phase 6 (final response).")
     
     print(f"\n**Next step number to use**: {max_step + 1}")
 
@@ -974,8 +1056,12 @@ Examples:
                         help="Save intermediate step output to folder.")
     parser.add_argument("--sub-skill",
                         help="Optional sub-skill name for the step file.")
+    parser.add_argument("--save-overview", nargs=3, metavar=("FOLDER_PATH", "STEP_NUM", "CONTENT"),
+                        help="Save the pre-final overview file (Phase 5 output).")
+    parser.add_argument("--save-final-response", nargs=3, metavar=("FOLDER_PATH", "STEP_NUM", "CONTENT"),
+                        help="Save the final response file (Phase 6 output) and mark study complete.")
     parser.add_argument("--save-report", nargs=3, metavar=("FOLDER_PATH", "LAST_STEP_NUM", "CONTENT"),
-                        help="Save the final report file in the study folder.")
+                        help="[DEPRECATED] Use --save-overview + --save-final-response instead.")
     parser.add_argument("--status", metavar="FOLDER_PATH",
                         help="Check study progress and report detailed status.")
     parser.add_argument("--validate-plan", nargs=2, metavar=("FOLDER_PATH", "STUDY_TYPE"),
@@ -1006,6 +1092,10 @@ Examples:
         update_plan(args.update_plan[0], args.update_plan[1])
     elif args.save_step:
         save_step(args.save_step[0], args.save_step[1], args.save_step[2], args.save_step[3], args.sub_skill)
+    elif args.save_overview:
+        save_overview(args.save_overview[0], args.save_overview[1], args.save_overview[2])
+    elif args.save_final_response:
+        save_final_response(args.save_final_response[0], args.save_final_response[1], args.save_final_response[2])
     elif args.save_report:
         save_report(args.save_report[0], args.save_report[1], args.save_report[2])
     elif args.status:
