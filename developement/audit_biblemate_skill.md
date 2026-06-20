@@ -1,0 +1,1 @@
+Audit the biblemate skill in [biblemate](.agents/skills/biblemate) , the original prompt for creating the skill was recorded in [biblemate.md](developement/biblemate.md) .  Make suggestions to further enhance the bible study workflow and the skill file.
