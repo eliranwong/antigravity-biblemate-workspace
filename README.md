@@ -107,7 +107,8 @@ If you wish to bring these custom Bible study agents and tools into a **differen
 
 1. **Copy Configuration & Preferences (Choose one method)**:
    - **Method A - Git users (Recommended)**: **Fork** this repository on GitHub and `git clone` it. This is highly recommended because when you write your own studies, generate exports, and run the `/sync` command, all changes will be synchronized cleanly to your own personal remote repository.
-   - **Method B - Manual Copy**: Manually copy the `.agents/` and `preferences/` folders from the root of this repository into the root of your new project. Google Antigravity will automatically discover the custom personas, skills, and workflows, while the `preferences/` folder preserves your default database preferences.
+   - **Method B - Manual Copy (Zip File)**: Download and unzip `[manual_setup.zip](https://github.com/eliranwong/antigravity-biblemate-workspace/blob/main/manual_setup.zip)` at the root of your new project. This automatically extracts the `.agents/` and `preferences/` directories. (You can generate or regenerate this zip file at any time by running the `/zip` command).
+   - **Method C - Manual Copy (Folders)**: Manually copy the `.agents/` and `preferences/` folders from the root of this repository into the root of your new project. Google Antigravity will automatically discover the custom personas, skills, and workflows, while the `preferences/` folder preserves your default database preferences.
 
 2. **Install System Prerequisites**: Ensure you have configured the [System Prerequisites](#system-prerequisites) on your system.
 
