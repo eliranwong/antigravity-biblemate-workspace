@@ -13,16 +13,30 @@ REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..', '..'))
 def slugify(text):
     # Remove XML/HTML tags
     text = re.sub(r'<[^>]+>', '', text)
-    # Convert to lowercase
-    text = text.lower()
-    # Keep only alphanumeric and spaces/hyphens
-    text = re.sub(r'[^a-z0-9\s-]', '', text)
-    # Replace spaces/hyphens with underscores
-    text = re.sub(r'[\s-]+', '_', text)
-    # Trim underscores
-    text = text.strip('_')
-    # Limit length to 50 chars
-    return text[:50]
+    text_clean = text.strip()
+    
+    # Check if there is any slash command anywhere in the text
+    slash_match = re.search(r'/([a-zA-Z0-9_]+)', text_clean)
+    if slash_match:
+        cmd = slash_match.group(1)
+        # Extract everything after the slash command
+        rest = text_clean[slash_match.end():]
+        rest = re.sub(r'[^a-zA-Z0-9\s-]', '', rest)
+        rest_words = rest.split()[:3]
+        if rest_words:
+            slug = cmd + "_" + "_".join(rest_words)
+        else:
+            slug = cmd
+        return slug.lower()[:35]
+        
+    # If no slash command, clean and take the first 4 words
+    text_cleaned = re.sub(r'[^a-zA-Z0-9\s-]', '', text_clean)
+    words = text_cleaned.split()[:4]
+    if not words:
+        return "export"
+    slug = "_".join(words)
+    return slug.lower()[:35]
+
 
 def convert_file(file_path):
     if not os.path.exists(file_path):
