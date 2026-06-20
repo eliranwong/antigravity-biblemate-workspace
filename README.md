@@ -1,5 +1,7 @@
 # Antigravity BibleMate Workspace
 
+*An integrated local workspace combining robust scripture databases, modular study skills, and specialized AI personas to streamline biblical research and writing in your IDE.*
+
 > [!NOTE]
 > **Where Rigorous Scholarship Meets Agentic Power:** This repository unites the advanced agentic workflow capability of the **Google Antigravity Platform** with the reliable, time-tested databases of the **[UniqueBible Project](https://github.com/eliranwong/UniqueBible)** and the modular AI exegesis tools of **[BibleMate AI](https://github.com/eliranwong/biblemate)**.
 
