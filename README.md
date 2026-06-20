@@ -48,6 +48,18 @@ For a full reference of all available slash commands and usage examples, see the
 
 ---
 
+## Preferences & Customization
+
+You can easily configure your preferred default versions for Bible translation, commentary, and lexicon lookups without modifying any code. To do this, edit the plain text files under the `preferences/` folder at the root of the repository:
+
+- **Bible Default Version**: Set your preference (e.g. `NET`, `KJV`, `ESV2016`) in [preferences/bible.md](file:///Users/admin/dev/antigravity_bible_agents/preferences/bible.md).
+- **Commentary Default Version**: Set your preference (e.g. `AIC`, `BI`, `BARNES`) in [preferences/commentary.md](file:///Users/admin/dev/antigravity_bible_agents/preferences/commentary.md).
+- **Lexicon Default Version**: Set your preference (e.g. `SECE`, `BDB`, `Thayer`) in [preferences/lexicon.md](file:///Users/admin/dev/antigravity_bible_agents/preferences/lexicon.md).
+
+These files are dynamically read by the respective retrievers on every execution.
+
+---
+
 ## Setting Up a New Repository
 
 To bring these powerful Bible study tools into a brand-new repository, follow these simple setup steps:
