@@ -80,7 +80,6 @@ If you wish to bring these custom Bible study agents and tools into a **differen
 
 2. **Install System Prerequisites**: Ensure you have configured the [System Prerequisites](#system-prerequisites) on your system.
 
-
 ---
 
 ## Preferences & Customization
@@ -95,15 +94,10 @@ These files are dynamically read by the respective retrievers on every execution
 
 ---
 
-## The AI Team Personas
+## Documentation
 
-The ecosystem configures a team of 9 specialized personas defined in [.agents/agents.md](.agents/agents.md):
-- **Billy Graham Persona**: Warm, earnest, direct evangelistic speaker.
-- **Context Analyst David**: Specializes in historical-emotional analysis of the Psalms and David's life.
-- **Biblical Content Interpreter**: Evaluates contemporary culture and articles from a Gospel-focused worldview.
-- **Compassionate Pastor**: Focuses on pastoral advice, study questions, and intercessory prayers in the first person.
-- **Verse Scripter**: Specializes in compiling and referencing lists of Bible verses and promises.
-- **Oxford Bible Scholar**: Rigorous, academic, historical-grammatical exegesis and structural outlines.
-- **Cambridge Theologian**: Systematic, doctrinal, and redemptive-historical analysis.
-- **Biblical Translator**: Focuses on literal contextual translation, morphology mapping, and biblical dialect.
-- **AI Agent Creator**: Meta-agent designed to construct new, safe Bible study agent descriptions.
+For in-depth details about the workflows, slash commands, and team structure, please refer to the files under the [docs/](file:///Users/admin/dev/antigravity_bible_agents/docs) directory:
+
+- **[ai_team_personas.md](file:///Users/admin/dev/antigravity_bible_agents/docs/ai_team_personas.md)**: Detailed profiles, guidelines, and expertise profiles for each of the 9 custom AI study personas.
+- **[slash_commands.md](file:///Users/admin/dev/antigravity_bible_agents/docs/slash_commands.md)**: A complete reference guide for all 110 custom slash commands (workflows), organized by study category with syntax examples.
+- **[README.md (Documentation Index)](file:///Users/admin/dev/antigravity_bible_agents/docs/README.md)**: Index and overview of repository documentation.
