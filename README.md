@@ -5,7 +5,7 @@
 > [!NOTE]
 > **Where Rigorous Scholarship Meets Agentic Power:** This repository unites the advanced agentic workflow capability of the **Google Antigravity Platform** with the reliable, time-tested databases of the **[UniqueBible Project](https://github.com/eliranwong/UniqueBible)** and the modular AI exegesis tools of **[BibleMate AI](https://github.com/eliranwong/biblemate)**.
 
-Welcome to the **Antigravity BibleMate Workspace**, a state-of-the-art local agentic study suite configured specifically as an extension for the **Google Antigravity** development platform (compatible with the Antigravity CLI, IDE, and platform). It features an integrated team of 9 customized study personas, 114 standalone exegesis and theology skills, and 114 custom slash commands.
+Welcome to the **Antigravity BibleMate Workspace**, a state-of-the-art local agentic study suite configured specifically as an extension for the **Google Antigravity** development platform (compatible with the Antigravity CLI, IDE, and platform). It features an integrated team of 10 customized study personas, 114 standalone exegesis and theology skills, and 114 custom slash commands.
 
 Whether you are a **pastor preparing a sermon**, a **bible content writer drafting articles**, a **theology student researching ancient manuscripts**, or a **believer deepening your study of the scriptures**, this workspace provides a unified, local-first environment where writing, AI agent assistance, and scholarly databases reside side-by-side in your IDE.
 
@@ -32,7 +32,7 @@ graph TD
     Phase0 --> Plan[Master Study Plan Generated & Validated]
     
     Plan --> Phase1[Phase 1: Local Data Retrieval]
-    subgraph Phase1_Sub ["Phase 1: Data (Oxford Scholar)"]
+    subgraph Phase1_Sub ["Phase 1: Data (Biblical Scholar)"]
         Phase1 --> Db1[(Bible Texts)]
         Phase1 --> Db2[(Greek/Hebrew Original)]
         Phase1 --> Db3[(Commentaries)]
@@ -41,7 +41,7 @@ graph TD
     end
     
     Db1 & Db2 & Db3 & Db4 & Db5 --> Phase2[Phase 2: Analysis & Exegesis]
-    subgraph Phase2_Sub ["Phase 2: Exegesis (Oxford Scholar)"]
+    subgraph Phase2_Sub ["Phase 2: Exegesis (Biblical Scholar)"]
         Phase2 --> Outline[Structural Outline]
         Phase2 --> Keywords[Word Study]
         Phase2 --> Context[Historical/Cultural Context]
@@ -49,14 +49,14 @@ graph TD
     end
     
     Outline & Keywords & Context & Flow --> Phase3[Phase 3: Theological Synthesis]
-    subgraph Phase3_Sub ["Phase 3: Theology (Cambridge Theologian)"]
+    subgraph Phase3_Sub ["Phase 3: Theology (Theologian)"]
         Phase3 --> Themes[Doctrinal Mapping]
         Phase3 --> Systematic[Systematic Soteriology]
         Phase3 --> Canon[Canonical Narrative Fit]
     end
     
     Themes & Systematic & Canon --> Phase4[Phase 4: Devotion & Application]
-    subgraph Phase4_Sub ["Phase 4: Heart (Billy Graham & Compassionate Pastor)"]
+    subgraph Phase4_Sub ["Phase 4: Heart (Compassionate Pastor)"]
         Phase4 --> Devotion[Devotional Reflection]
         Phase4 --> Application[Practical Action Steps]
         Phase4 --> Prayer[Heartfelt Scriptural Prayer]
@@ -123,7 +123,7 @@ Because this repository is already configured with the standard Antigravity work
    agy
    ```
 2. **Auto-Discovery**: Antigravity automatically detects the `.agents/` directory at the project root. It will:
-   - Load the 9 custom personas from `agents.md` into the agent selection registry.
+   - Load the 10 custom personas from `agents.md` into the agent selection registry.
    - Register the 114 skills in `.agents/skills/` for progressive disclosure.
    - Expose the 114 workflow files in `.agents/workflows/` as native slash commands.
 
@@ -197,7 +197,7 @@ These files are dynamically read by the respective retrievers on every execution
 
 For in-depth details about the workflows, slash commands, and team structure, please refer to the files under the [docs/](docs) directory:
 
-- **[ai_team_personas.md](docs/ai_team_personas.md)**: Detailed profiles, guidelines, and expertise profiles for each of the 9 custom AI study personas.
+- **[ai_team_personas.md](docs/ai_team_personas.md)**: Detailed profiles, guidelines, and expertise profiles for each of the 10 custom AI study personas.
 - **[slash_commands.md](docs/slash_commands.md)**: A complete reference guide for all 114 custom slash commands (workflows), organized by study category with syntax examples.
 - **[README.md (Documentation Index)](docs/README.md)**: Index and overview of repository documentation.
 
