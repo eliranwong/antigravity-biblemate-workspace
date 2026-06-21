@@ -322,8 +322,11 @@ class BibleMateApp:
                 for root, dirs, files in os.walk(folder):
                     for file in files:
                         is_valid = False
+                        normalized_root = root.replace('\\', '/')
                         if folder == 'images':
                             is_valid = file.lower().endswith(('.png', '.jpg', '.jpeg'))
+                        elif folder == 'export' and 'export/docx' in normalized_root:
+                            is_valid = file.lower().endswith('.docx')
                         else:
                             is_valid = file.endswith('.md')
                         if is_valid:
@@ -349,13 +352,19 @@ class BibleMateApp:
         
         is_markdown = node_id.endswith('.md')
         is_image = node_id.lower().endswith(('.png', '.jpg', '.jpeg'))
+        is_docx = node_id.lower().endswith('.docx')
         
-        if not (is_markdown or is_image):
+        if not (is_markdown or is_image or is_docx):
             return
-        
+            
         file_path = os.path.join(WORKSPACE_DIR, node_id)
         if os.path.exists(file_path):
             try:
+                if is_docx:
+                    ui.download(file_path)
+                    ui.notify(f"Downloading: {os.path.basename(node_id)}", type='info')
+                    return
+
                 # Switch tab to reader
                 self.main_tabs.set_value('reader')
                 # Render content
