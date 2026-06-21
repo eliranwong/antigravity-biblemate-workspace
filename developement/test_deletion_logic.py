@@ -23,6 +23,11 @@ class TestDeletionLogic(unittest.TestCase):
             'images',
             'images/readme.md',
             'images/readme',
+            'biblemate/README.md',
+            'export/README.md',
+            'export/md/README.md',
+            'export/docx/README.md',
+            'images/README.md',
             '../outside_file.txt',
             '/absolute/path/file.txt'
         ]

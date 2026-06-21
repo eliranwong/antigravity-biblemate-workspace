@@ -389,6 +389,10 @@ class BibleMateApp:
             return False
         clean_path = os.path.normpath(path).replace('\\', '/')
         
+        # Protect any README.md files
+        if os.path.basename(clean_path).lower() == 'readme.md':
+            return False
+            
         # Explicitly protect root and direct parent folders
         protected = {
             '.', '', 'biblemate', 'export', 'export/md', 'export/docx', 'images',
