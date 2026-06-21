@@ -45,8 +45,17 @@ def convert_file(file_path):
         
     dir_name = os.path.dirname(file_path)
     base_name = os.path.splitext(os.path.basename(file_path))[0]
-    output_file = os.path.join(dir_name, f"{base_name}.docx")
     
+    # Redirect output to export/docx if the source file is located within the export structure
+    normalized_dir = os.path.abspath(dir_name)
+    normalized_export = os.path.abspath(os.path.join(REPO_ROOT, "export"))
+    if normalized_dir == normalized_export or normalized_dir.startswith(normalized_export + os.sep):
+        export_docx_dir = os.path.join(REPO_ROOT, "export", "docx")
+        os.makedirs(export_docx_dir, exist_ok=True)
+        output_file = os.path.join(export_docx_dir, f"{base_name}.docx")
+    else:
+        output_file = os.path.join(dir_name, f"{base_name}.docx")
+        
     ext = os.path.splitext(file_path)[1].lower()
     
     if ext == '.docx':
