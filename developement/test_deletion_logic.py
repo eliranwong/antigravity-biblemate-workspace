@@ -28,6 +28,9 @@ class TestDeletionLogic(unittest.TestCase):
             'export/md/README.md',
             'export/docx/README.md',
             'images/README.md',
+            'docs',
+            'docs/help.md',
+            'docs/subfolder/doc.txt',
             '../outside_file.txt',
             '/absolute/path/file.txt'
         ]

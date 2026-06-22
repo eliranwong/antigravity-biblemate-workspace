@@ -332,7 +332,7 @@ class BibleMateApp:
                 add_to_tree(path_parts[1:], found_node['children'], full_path)
 
         nodes = []
-        for folder in ['biblemate', 'export', 'images']:
+        for folder in ['biblemate', 'images', 'export', 'docs']:
             if os.path.exists(folder):
                 folder_node = {'id': folder, 'label': folder, 'children': []}
                 nodes.append(folder_node)
@@ -408,6 +408,10 @@ class BibleMateApp:
         
         # Protect any README.md files
         if os.path.basename(clean_path).lower() == 'readme.md':
+            return False
+            
+        # Protect the docs folder and any files in it
+        if clean_path.lower() == 'docs' or clean_path.lower().startswith('docs/'):
             return False
             
         # Explicitly protect root and direct parent folders
