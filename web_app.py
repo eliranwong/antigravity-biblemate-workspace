@@ -178,6 +178,7 @@ class BibleMateApp:
         self.tool_output_display = None
         self.terminal_display = None
         self.delete_button = None
+        self.export_button = None
         self.selected_node_id = None
         self.terminal_logs = []
         self.active_agent_running = False
@@ -459,6 +460,8 @@ class BibleMateApp:
             self.selected_node_id = None
             if self.delete_button:
                 self.delete_button.set_visibility(False)
+            if self.export_button:
+                self.export_button.set_visibility(False)
             
             # Clear reader view if deleted file was open
             if self.reader_title.text == os.path.basename(node_id):
@@ -471,6 +474,47 @@ class BibleMateApp:
         except Exception as e:
             ui.notify(f"Error during deletion: {e}", type='negative')
 
+    async def export_to_docx(self):
+        """Converts the selected markdown file to docx using pandoc."""
+        node_id = getattr(self, 'selected_node_id', None)
+        if not node_id or not node_id.lower().endswith('.md'):
+            ui.notify("No markdown file selected for export.", type='warning')
+            return
+            
+        full_path = os.path.join(WORKSPACE_DIR, node_id)
+        if not os.path.exists(full_path):
+            ui.notify("File not found.", type='warning')
+            return
+            
+        import datetime
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
+        original_basename = os.path.basename(node_id)
+        if original_basename.lower().endswith('.md'):
+            original_name_without_ext = original_basename[:-3]
+        else:
+            original_name_without_ext = original_basename
+            
+        output_filename = f"{timestamp}_{original_name_without_ext}.docx"
+        output_dir = os.path.join(WORKSPACE_DIR, 'export', 'docx')
+        os.makedirs(output_dir, exist_ok=True)
+        output_path = os.path.join(output_dir, output_filename)
+        
+        try:
+            process = await asyncio.create_subprocess_exec(
+                'pandoc', '-s', '-o', output_path, full_path,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE
+            )
+            stdout, stderr = await process.communicate()
+            if process.returncode == 0:
+                ui.notify(f"Successfully exported to DOCX: {output_filename}", type='positive')
+                self.refresh_file_tree()
+            else:
+                err_msg = stderr.decode('utf-8').strip()
+                ui.notify(f"Pandoc error: {err_msg}", type='negative')
+        except Exception as e:
+            ui.notify(f"Error during export: {e}", type='negative')
+
     def handle_tree_select(self, node_id: str):
         self.selected_node_id = node_id
         if node_id:
@@ -478,12 +522,19 @@ class BibleMateApp:
             if self.delete_button:
                 self.delete_button.set_visibility(deletable)
             
+            is_file = os.path.isfile(os.path.join(WORKSPACE_DIR, node_id))
+            is_md = is_file and node_id.lower().endswith('.md')
+            if self.export_button:
+                self.export_button.set_visibility(is_md)
+            
             # Open files in the Document Reader automatically
-            if os.path.isfile(os.path.join(WORKSPACE_DIR, node_id)):
+            if is_file:
                 self.handle_file_select(node_id)
         else:
             if self.delete_button:
                 self.delete_button.set_visibility(False)
+            if self.export_button:
+                self.export_button.set_visibility(False)
 
     def refresh_file_tree(self):
         nodes = self.build_file_tree_nodes()
@@ -691,6 +742,14 @@ class BibleMateApp:
                 with ui.row().classes('items-center gap-1'):
                     self.delete_button = ui.button(icon='delete', on_click=self.confirm_delete).props('flat round size=sm color=red').classes('text-rose-500')
                     self.delete_button.set_visibility(False)
+                    with self.delete_button:
+                        ui.tooltip('Delete Item')
+                    
+                    self.export_button = ui.button(icon='file_download', on_click=self.export_to_docx).props('flat round size=sm color=indigo').classes('text-indigo-500')
+                    self.export_button.set_visibility(False)
+                    with self.export_button:
+                        ui.tooltip('Export to DOCX')
+                        
                     ui.button(icon='refresh', on_click=self.refresh_file_tree).props('flat round size=sm').classes('text-slate-600 dark:text-slate-400')
             
             # Dynamic Container
