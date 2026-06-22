@@ -36,10 +36,12 @@ Before running the web app, ensure the following dependencies are installed on y
 | `google-antigravity` | latest | AI agent SDK |
 | `nicegui` | latest | Web UI framework |
 | `Pillow` | latest | Image format conversion |
+| `biblematedata` | latest | Local scripture database manager |
 
 ### System Requirements
 
 - A valid **Google Antigravity** account with an active session (`antigravity auth login`)
+- Installed and initialized local Bible databases via `biblematedata`
 - The **BibleMate workspace** cloned from the repository with all `.agents/` skills and database files in place
 
 ---
@@ -53,10 +55,11 @@ git clone https://github.com/eliranwong/antigravity-biblemate-workspace.git
 cd antigravity-biblemate-workspace
 ```
 
-### Step 2: Install Python Dependencies
+### Step 2: Install Python Dependencies & Database
 
 ```bash
-pip install google-antigravity nicegui Pillow
+pip install --upgrade google-antigravity nicegui Pillow biblematedata
+biblematedata
 ```
 
 > **Tip:** If you use `pyenv` or `venv`, activate your environment first before installing.
