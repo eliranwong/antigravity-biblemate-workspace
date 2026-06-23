@@ -162,7 +162,8 @@ In addition to the native Antigravity IDE integration, this workspace ships with
 ### Quick Launch
 
 ```bash
-pip install google-antigravity nicegui Pillow
+pip install biblematedata google-antigravity nicegui Pillow
+biblematedata
 python3 web_app.py
 ```
 

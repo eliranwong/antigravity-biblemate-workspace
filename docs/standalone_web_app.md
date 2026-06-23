@@ -58,7 +58,7 @@ cd antigravity-biblemate-workspace
 ### Step 2: Install Python Dependencies & Database
 
 ```bash
-pip install --upgrade google-antigravity nicegui Pillow biblematedata
+pip install --upgrade biblematedata google-antigravity nicegui Pillow
 biblematedata
 ```
 
@@ -361,7 +361,7 @@ If using a virtual environment or pyenv, ensure the correct Python interpreter i
 
 ```bash
 which python3
-pip install google-antigravity nicegui Pillow
+pip install biblematedata google-antigravity nicegui Pillow
 ```
 
 ---
