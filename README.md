@@ -180,7 +180,18 @@ Then open **[http://localhost:33377](http://localhost:33377)** in your browser.
 
 ---
 
-## Quick Start & Auto-Discovery
+## Quick Start
+
+```bash
+# Navigate to your workspace directory
+cd <workspace_directory_name>
+# Download and import into your workspace directory
+curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip manual_setup.zip && rm manual_setup.zip
+# launch Antigravity
+antigravity-ide # or 'antigravity' (GUI without text editor) or agy (Antigravity CLI)
+```
+
+## Auto-Discovery
 
 Because this repository is already configured with the standard Antigravity workspace schema, the custom personas, skills, and workflows are **automatically discovered and registered locally** in your workspace when you open this project folder in your IDE.
 
