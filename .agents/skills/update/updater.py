@@ -22,10 +22,10 @@ def main():
     print(f"Conditions met. Running update command in workspace: {repo_root}")
     
     # Command to run:
-    # curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip manual_setup.zip && rm manual_setup.zip && mkdir -p biblemate notes images export
+    # curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip -o manual_setup.zip && rm manual_setup.zip && mkdir -p biblemate notes images export
     cmd = (
         "curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip "
-        "&& unzip manual_setup.zip "
+        "&& unzip -o manual_setup.zip "
         "&& rm manual_setup.zip "
         "&& mkdir -p biblemate notes images export"
     )
