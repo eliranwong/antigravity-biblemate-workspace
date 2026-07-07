@@ -5,7 +5,7 @@
 > [!NOTE]
 > **Where Rigorous Scholarship Meets Agentic Power:** This repository unites the advanced agentic workflow capability of the **Google Antigravity Platform** with the reliable, time-tested databases of the **[UniqueBible Project](https://github.com/eliranwong/UniqueBible)** and the modular AI exegesis tools of **[BibleMate AI](https://github.com/eliranwong/biblemate)**.
 
-Welcome to the **Antigravity BibleMate Workspace**, a state-of-the-art local agentic study suite configured specifically as an extension for the **Google Antigravity** development platform (compatible with the Antigravity CLI, IDE, and platform). It features an integrated team of 15 customized study personas, 123 standalone exegesis and theology skills, and 123 custom slash commands.
+Welcome to the **Antigravity BibleMate Workspace**, a state-of-the-art local agentic study suite configured specifically as an extension for the **Google Antigravity** development platform (compatible with the Antigravity CLI, IDE, and platform). It features an integrated team of 15 customized study personas, 124 standalone exegesis and theology skills, and 124 custom slash commands.
 
 Whether you are a **pastor preparing a sermon**, a **bible content writer drafting articles**, a **theology student researching ancient manuscripts**, or a **believer deepening your study of the scriptures**, this workspace provides a unified, local-first environment where writing, AI agent assistance, and scholarly databases reside side-by-side in your IDE.
 
@@ -262,15 +262,15 @@ If you wish to bring these custom Bible study agents and tools into a **differen
       * **Via Terminal (Recommended)**: Run the command for your operating system in your project root to download, extract, and clean up:
         * **macOS / Linux**:
           ```bash
-          curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip manual_setup.zip && rm manual_setup.zip
+          curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip manual_setup.zip && rm manual_setup.zip && mkdir -p biblemate notes images export
           ```
         * **Windows (PowerShell)**:
           ```powershell
-          Invoke-WebRequest -Uri "https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip" -OutFile "manual_setup.zip"; Expand-Archive -Path "manual_setup.zip" -DestinationPath "." -Force; Remove-Item -Path "manual_setup.zip"
+          Invoke-WebRequest -Uri "https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip" -OutFile "manual_setup.zip"; Expand-Archive -Path "manual_setup.zip" -DestinationPath "." -Force; Remove-Item -Path "manual_setup.zip"; New-Item -ItemType Directory -Path "biblemate","notes","images","export" -Force
           ```
         * **Windows (Command Prompt)**:
           ```cmd
-          curl.exe -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && tar -xf manual_setup.zip && del manual_setup.zip
+          curl.exe -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && tar -xf manual_setup.zip && del manual_setup.zip && md biblemate notes images export
           ```
       * **Via GUI (Double-Click)**: If you extract using double-click on macOS, the OS will wrap the contents in a `manual_setup` folder. Simply move the `.agents/` and `preferences/` folders out of it and into your project root.
       *(You can generate or regenerate this zip file at any time by running the `/zip` command).*
@@ -281,7 +281,9 @@ If you wish to bring these custom Bible study agents and tools into a **differen
 ### How to Update
 To update your workspace with the latest agent configurations, skills, and command definitions:
 * **For Git users (Method A)**: Simply run `git pull` in your terminal to fetch and merge the latest updates from the upstream repository.
-* **For Manual users (Method B or C)**: Simply redo the manual download (downloading and extracting the fresh `manual_setup.zip`) or re-copy the `.agents/` and `preferences/` directories into your repository root, overwriting the existing folders.
+* **For Manual users (Method B or C)**:
+  * **Via Slash Command (macOS/Linux only)**: Run the `/update` command in the chat interface. This automatically downloads the latest `manual_setup.zip`, extracts it, and creates required workspace directories.
+  * **Via Terminal**: Simply redo the manual download (downloading and extracting the fresh `manual_setup.zip`) or re-copy the `.agents/` and `preferences/` directories into your repository root, overwriting the existing folders.
 
 ---
 
