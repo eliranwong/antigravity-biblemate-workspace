@@ -195,7 +195,7 @@ Download the agents and setup the workspace folder:
 # Navigate to your workspace directory
 cd <workspace_directory_name>
 # Download and import into your workspace directory
-curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip -o manual_setup.zip && rm manual_setup.zip && mkdir -p biblemate notes images export
+curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && tar -xf manual_setup.zip && rm manual_setup.zip && mkdir -p biblemate notes images export
 ```
 
 Launch Antigravity, for example:
@@ -262,7 +262,7 @@ If you wish to bring these custom Bible study agents and tools into a **differen
       * **Via Terminal (Recommended)**: Run the command for your operating system in your project root to download, extract, and clean up:
         * **macOS / Linux**:
           ```bash
-          curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && unzip -o manual_setup.zip && rm manual_setup.zip && mkdir -p biblemate notes images export
+          curl -L -O https://github.com/eliranwong/antigravity-biblemate-workspace/raw/main/manual_setup.zip && tar -xf manual_setup.zip && rm manual_setup.zip && mkdir -p biblemate notes images export
           ```
         * **Windows (PowerShell)**:
           ```powershell
