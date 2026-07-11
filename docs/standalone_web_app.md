@@ -1,6 +1,6 @@
 # Standalone Web Application — Setup & Usage Guide
 
-The **Antigravity BibleMate Web App** is a self-contained, browser-based control centre that lets you run the full suite of BibleMate AI agents, monitor their execution in real time, browse generated study reports, and view AI-generated biblical images — all from any modern web browser on your local machine.
+The **BibleMate Agentic Web App** is a self-contained, browser-based control centre that lets you run the full suite of BibleMate AI agents, monitor their execution in real time, browse generated study reports, and view AI-generated biblical images — all from any modern web browser on your local machine.
 
 > **Main entry point:** [`web_app.py`](../web_app.py)  
 > **Default URL:** [http://localhost:33377](http://localhost:33377)

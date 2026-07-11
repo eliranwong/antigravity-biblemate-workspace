@@ -1,6 +1,6 @@
 # Study Outputs Reference Guide
 
-For pastors, theologians, and biblical scholars, having instant access to editable, permanent files is essential. Unlike standard chat assistants where research disappears when the session ends or gets buried in temporary artifact caches, the **Antigravity BibleMate Workspace** automatically writes all theological output directly to physical, editable markdown (`.md`) documents inside your local workspace.
+For pastors, theologians, and biblical scholars, having instant access to editable, permanent files is essential. Unlike standard chat assistants where research disappears when the session ends or gets buried in temporary artifact caches, the **BibleMate Agentic Workspace** automatically writes all theological output directly to physical, editable markdown (`.md`) documents inside your local workspace.
 
 This guide details where those files are saved, how they are named, and how to utilize them in your sermon preparation or academic research.
 
