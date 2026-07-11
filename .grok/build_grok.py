@@ -97,6 +97,11 @@ TOOL_REPLACEMENTS = [
         "tools: Read, Write, Edit, Bash, Grep, Glob, Task",
         "tools: read_file, write, search_replace, run_terminal_command, grep, list_dir, spawn_subagent",
     ),
+    # Antigravity / Claude web tooling → Grok Build web tools
+    ("`search_web`", "`web_search`"),
+    ("`read_url_content`", "`web_fetch` / `open_page`"),
+    ("search_web", "web_search"),
+    ("read_url_content", "web_fetch / open_page"),
 ]
 
 
@@ -184,6 +189,7 @@ def enhance_skill_description(text: str, skill_name: str) -> str:
 
 def transform_python(text: str) -> str:
     text = rewrite_paths(text)
+    text = rewrite_tools(text)
     # Preferences already resolve via script_dir/../.. which works for .grok/skills/<name>/
     return text
 

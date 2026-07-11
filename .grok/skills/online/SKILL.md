@@ -6,7 +6,7 @@ description: Search, fetch, and integrate latest online information for scholarl
 # Online Search & Synthesis Skill
 
 ## Overview
-This standalone skill enables any agent to leverage the web search and fetching capabilities of the Antigravity platform (`search_web`, `read_url_content`) to retrieve and synthesize real-time scholarly, historical, legal, and personal testimony information that directly enhances Bible study.
+This standalone skill enables any agent to leverage the web search and fetching capabilities of the Antigravity platform (`web_search`, `web_fetch` / `open_page`) to retrieve and synthesize real-time scholarly, historical, legal, and personal testimony information that directly enhances Bible study.
 
 ## Guidelines & Objectives
 When executing this skill:
@@ -20,8 +20,8 @@ When executing this skill:
   - Historical & Archaeological Discoveries
 
 ## Instructions
-1. **Search Phase**: Perform focused queries using `search_web` to locate recent (or historically significant) articles, papers, news, and testimonies relevant to the query.
-2. **Fetch Phase**: Read the most relevant search results using `read_url_content` to extract details, quotes, and citations.
+1. **Search Phase**: Perform focused queries using `web_search` to locate recent (or historically significant) articles, papers, news, and testimonies relevant to the query.
+2. **Fetch Phase**: Read the most relevant search results using `web_fetch` / `open_page` to extract details, quotes, and citations.
 3. **Synthesis**:
    - Compile the findings into a clear, structured markdown report.
    - List key insights, modern applications, and how these findings enrich our understanding of the related Bible verses or topics.

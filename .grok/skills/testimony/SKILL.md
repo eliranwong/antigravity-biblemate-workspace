@@ -24,9 +24,10 @@ When executing this skill:
    ```
 2. **Perform Online Search (if needed)**:
    If no direct match is found in the local registry, or if a specific modern scenario is queried:
-   - Use the `search_web` tool to search for real-life testimonies, modern missionary reports, or news articles.
-   - Use the `read_url_content` tool to fetch pages and verify the details.
+   - Use the `web_search` tool to search for real-life testimonies, modern missionary reports, or news articles.
+   - Use the `web_fetch` / `open_page` tool to fetch pages and verify the details.
    - Compile the narrative, biographical background, and fact-checking sources.
+   - Never invent or embellish a testimony when sources cannot be verified.
 3. **Retrieve and Quote Bible Passages**:
    Identify the theological themes or verses connected to the testimony, and retrieve the exact text of those verses using the local `bible` skill.
 4. **Draft and Integrate**:

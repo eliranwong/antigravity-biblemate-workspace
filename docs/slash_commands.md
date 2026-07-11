@@ -78,7 +78,7 @@ These commands focus on practical living, personal prayer, and preparing to teac
 | **`/questions`** | Generates observation, interpretation, and application study questions. | Compassionate Pastor | A bible passage | `/questions Luke 15:11-32` |
 | **`/prayer`** | Writes a rich scriptural prayer in the first person based on the text. | Compassionate Pastor | A bible passage | `/prayer Philippians 4:4-7` |
 | **`/short-prayer`** | Writes a brief, direct scriptural prayer (single paragraph) based on the text. | Compassionate Pastor | A bible passage | `/short-prayer Psalm 19` |
-| **`/testimony`** | Writes a verified real-life or missionary testimony matching the user's input/need, complete with detailed background and fact-checking sources. | Passionate Evangelist | A topic, struggle, or historical name | `/testimony George Muller provision` |
+| **`/testimony`** | Writes a **real** (never fabricated) life or missionary testimony matching the user's input/need—local registry first, optional online research—with full biographical background and fact-checkable sources. Also available to `/biblemate` and `/biblemate-super`. | Passionate Evangelist | A topic, struggle, or historical name | `/testimony George Muller provision` |
 | **`/promises`** | Quotes and explains biblical promises related to a topic. | Verse Scripter | A biblical topic | `/promises Anxiety` |
 | **`/quotes`** | Finds and quotes multiple relevant cross-references. | Verse Scripter | A biblical topic or query | `/quotes Covenant` |
 | **`/daily-read`** | Retrieves the scheduled daily bible readings for a given date or today, and retrieves the bible texts. | Verse Scripter | A date or relative expression (e.g. 'today', 'tomorrow') | `/daily-read today` |

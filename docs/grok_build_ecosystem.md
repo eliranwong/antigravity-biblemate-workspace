@@ -117,6 +117,7 @@ Type `/` in the Grok prompt to open autocomplete, then pick a skill or command. 
 /bible NET John 3:16
 /devotion Romans 8:28
 /sermon Psalm 23
+/testimony George Muller provision
 /keywords Ephesians 2:1-10
 /commentary BNC John 3:16
 /lexicon G26
@@ -126,6 +127,23 @@ Type `/` in the Grok prompt to open autocomplete, then pick a skill or command. 
 ```
 
 Full command catalog (shared names across platforms): [slash_commands.md](slash_commands.md).
+
+### `/testimony` (real-life & missionary stories)
+
+Use **`/testimony`** when you need a sermon illustration or encouragement drawn from a **verified** real-life or missionary testimony (never fabricated):
+
+```text
+/testimony George Muller provision
+/testimony Corrie ten Boom forgiveness
+```
+
+The skill searches a local registry first:
+
+```bash
+python3 .grok/skills/testimony/testimony_retriever.py "George Muller"
+```
+
+If there is no local match, the agent researches online with Grok web tools and must still provide biographical background plus fact-checkable sources. Outputs save under `biblemate/` as `YYYY-MM-DD-HH-MM-SS_testimony_<slug>.md`. The same skill is a recommended option inside **`/biblemate`** and **`/biblemate-super`** for passage, topical, and sermon studies.
 
 ### Automatic skill invocation
 
@@ -138,7 +156,7 @@ Grok can load a skill without a slash when your request matches its description�
 | **`/biblemate`** | Multi-phase orchestrated study: plan → local data retrieval → exegesis → theology → application → pre-final overview → iterative final manuscript |
 | **`/biblemate-super`** | Dynamically planned multi-phase study with quality-audit checkpoints and persona rotation |
 
-Both write step files under `biblemate/` (timestamped study folders). They enforce local `bible` retrieval and do not quote Scripture from memory.
+Both write step files under `biblemate/` (timestamped study folders). They enforce local `bible` retrieval and do not quote Scripture from memory. Both discover `testimony` via `--list-skills` and may recommend it for application, topical, and sermon-style plans.
 
 ### Book search skills
 

@@ -113,6 +113,7 @@ These skills synthesize the analytical work into theological understanding:
 - `questions` — Small group discussion questions
 - If sermon was requested: `sermon` — Full sermon outline and content
 - If promises are relevant: `promises` — Biblical promises for the topic
+- If a real-life illustration or missionary story fits the request: `testimony` — verified real-life or missionary testimonies with background and fact-checking sources (never fabricated)
 
 **Context Passing**: Application and devotion must be grounded in the exegetical and theological work from Phases 2–3. Don't write generic devotions — weave in specific keywords, cross-references, and theological insights discovered earlier.
 
@@ -299,6 +300,8 @@ Select skills based on the classified study type. **Required** skills must appea
 | — | `chronology` |
 | — | `names` |
 | — | `locations` |
+| — | `parallels` |
+| — | `testimony` |
 
 ### Book Study
 > e.g., "Introduce the book of Romans", "Overview of Genesis"
@@ -322,6 +325,8 @@ Select skills based on the classified study type. **Required** skills must appea
 | `search` | `promises` |
 | `themes` | `perspective` |
 | `bible` (key passages) | `application` |
+| — | `parallels` |
+| — | `testimony` |
 
 ### Sermon / Devotion Request
 > e.g., "Write a sermon on Psalm 23", "Devotion on the Beatitudes"
@@ -336,6 +341,7 @@ Select skills based on the classified study type. **Required** skills must appea
 | `prayer` | `chronology` |
 | — | `names` |
 | — | `locations` |
+| — | `testimony` |
 
 ---
 

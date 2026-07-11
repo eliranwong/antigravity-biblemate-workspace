@@ -59,7 +59,7 @@ integration targets **Google Antigravity**; equivalent ecosystems ship for
 **Claude Code** and **Grok Build**:
 * **Automatic Workspace Loading**: Open this workspace in Antigravity, Claude Code, or Grok Build, and the matching tree (`.agents/`, `.claude/`, or `.grok/`) loads personas, skills, and slash commands.
 * **Inline Composition**: Write your study guides, sermons, or articles in the IDE while conversing with specialized agents in the side panel.
-* **Slash Commands**: Execute complex workflows (e.g. `/sermon Romans 8:28` or `/translate-greek John 1:1`) with simple, parameterized commands—**same command names** across platforms.
+* **Slash Commands**: Execute complex workflows (e.g. `/sermon Romans 8:28`, `/testimony George Muller provision`, or `/translate-greek John 1:1`) with simple, parameterized commands—**same command names** across platforms.
 
 ---
 
@@ -247,12 +247,13 @@ re-opened on another.
    biblematedata
    ```
 3. **Run any slash command** exactly as you would on Antigravity — Claude Code
-   registers the same names: `/bible`, `/sermon`, `/devotion`, `/biblemate`,
-   `/biblemate-super`, `/translate-greek`, `/Gen` (book search), `/data`,
-   `/sync`, etc. For example:
+   registers the same names: `/bible`, `/sermon`, `/devotion`, `/testimony`,
+   `/biblemate`, `/biblemate-super`, `/translate-greek`, `/Gen` (book search),
+   `/data`, `/sync`, etc. For example:
    ```
    /bible NET John 3:16
    /sermon Romans 8:28
+   /testimony George Muller provision
    /translate-greek John 1:1
    ```
 4. **Scripture integrity & output saving** are enforced the same way as on
@@ -330,10 +331,14 @@ Full usage guide: **[docs/grok_build_ecosystem.md](docs/grok_build_ecosystem.md)
    /bible NET John 3:16
    /devotion Romans 8:28
    /sermon Psalm 23
+   /testimony Corrie ten Boom forgiveness
    /biblemate Study grace in Ephesians 2
    ```
-   Skills also appear under `/skills` and can auto-invoke from natural language
-   when their descriptions match the request.
+   `/testimony` writes a **verified real-life or missionary** story (never
+   fabricated) with biographical background and fact-checkable sources; it is
+   also available to `/biblemate` and `/biblemate-super` as an integrable study
+   skill. Skills also appear under `/skills` and can auto-invoke from natural
+   language when their descriptions match the request.
 4. **Scripture integrity & output saving** match the other ports: fetch verses
    with `python3 .grok/skills/bible/bible_retriever.py "..."` (never from
    memory), and save study outputs under `biblemate/` with a
@@ -463,9 +468,9 @@ Because this repository is already configured with standard multi-platform works
 - **Claude Code**: open this repo as the project root; `.claude/skills/` and `.claude/commands/` are auto-discovered. See [Claude Code Equivalent Ecosystem](#-claude-code-equivalent-ecosystem-optional-bonus).
 - **Grok Build**: open this repo as the workspace root; `.grok/skills/`, `.grok/commands/`, and root `AGENTS.md` are auto-discovered. See [Grok Build Equivalent Ecosystem](#-grok-build-equivalent-ecosystem-optional-bonus) and **[docs/grok_build_ecosystem.md](docs/grok_build_ecosystem.md)**.
 
-Slash command **names** are the same across platforms (e.g. `/bible`, `/sermon`, `/biblemate`).
+Slash command **names** are the same across platforms (e.g. `/bible`, `/sermon`, `/testimony`, `/biblemate`).
 
-For a full reference of all available slash commands and usage examples, see the [Slash Commands Reference Guide](docs/slash_commands.md).
+For a full reference of all available slash commands and usage examples, see the [Slash Commands Reference Guide](docs/slash_commands.md). That guide includes **`/testimony`**: verified real-life or missionary testimonies with background details and fact-checking sources (never fabricated), usable alone or as a recommended skill inside `/biblemate` and `/biblemate-super`.
 
 ---
 

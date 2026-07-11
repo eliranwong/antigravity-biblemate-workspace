@@ -132,7 +132,7 @@ def main():
     
     if not matches:
         print("No direct matching testimony found in the local database.")
-        print("Please search online using search tools (e.g., search_web) to find real, verified testimonies matching your request.")
+        print("Please search online using available web search tools to find real, verified testimonies matching your request. Do not fabricate a testimony.")
         sys.exit(0)
         
     # Get the best match

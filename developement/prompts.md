@@ -493,3 +493,7 @@ If the queries and bible references does not make sense at all, clarify with use
 ## Prompt for creating testimony skill
 
 Create a new skill `testimony` and a new slash command workflow `/testimony`, to write testimony in response to users input.  For example, it could be a testimony fit for a sermon or encouragement. At the best of your reasonings, response with testimoney that best can best resolve users inputs.  The testimony must be real.  It must not be fake or fabricated.  It could be real life example that you find with online researches.  It can also be a real example or testimony from real missionary history. In addition to the testimony writing, give full background details and sources about the testimony.  Ideally, there are ways users can fact check about the testimony.
+
+Make sure this testimony skill is integrated as one of the skills made available for the /biblemate and the /biblemate-super skills.  Update, where appropriate, these two existing workflow as well as the files in docs directory and the README.md in the root directory to reflect this change.
+
+I've just created this skill for the Claude Code platform in .claude/skills/testimony folder and the workflow in .claude/commands/testimony.md . Please make sure the same skill is created for the Grok Build platform, according to Grok Build standards.

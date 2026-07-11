@@ -32,9 +32,9 @@ workspace-root/
 The saving behavior depends on whether you run a multi-phase orchestrated study or a single direct slash command/skill.
 
 ### 1. Individual Study Skills
-When you run individual skills (e.g., `/outline Romans 8`, `/devotion Psalm 23`, `/translate-greek John 1:1`), the agent will formulate the response and automatically save a standalone markdown file directly to the root of the `biblemate/` subdirectory.
+When you run individual skills (e.g., `/outline Romans 8`, `/devotion Psalm 23`, `/testimony George Muller provision`, `/translate-greek John 1:1`), the agent will formulate the response and automatically save a standalone markdown file directly to the root of the `biblemate/` subdirectory.
 *   **Format**: `biblemate/YYYY-MM-DD-HH-MM-SS_description.md`
-*   **Example**: `biblemate/2026-06-23-00-15-42_sleep_well_prayer.md`
+*   **Examples**: `biblemate/2026-06-23-00-15-42_sleep_well_prayer.md`, `biblemate/2026-07-11-23-46-21_testimony_george_m_ller.md`
 *   **Benefit**: If you execute the same command multiple times, the unique timestamp prevents files from overwriting each other, allowing you to compare different translations, commentaries, or devotional drafts side-by-side.
 
 ### 2. Orchestrated Multi-Phase Studies (`/biblemate` & `/biblemate-super`)
