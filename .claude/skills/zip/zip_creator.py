@@ -23,7 +23,8 @@ def main():
     print("Creating manual_setup.zip...")
     
     # Folders to zip
-    folders_to_zip = ['.claude', 'preferences']
+    folders_to_zip = ['.claude', 'preferences', '.grok']
+    files_to_zip = ['AGENTS.md']
     
     try:
         with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -42,9 +43,15 @@ def main():
                         # The relative path within the zip archive
                         arcname = os.path.relpath(file_path, REPO_ROOT)
                         zipf.write(file_path, arcname)
+            for rel in files_to_zip:
+                file_path = os.path.join(REPO_ROOT, rel)
+                if not os.path.isfile(file_path):
+                    print(f"Warning: File '{rel}' does not exist, skipping.")
+                    continue
+                zipf.write(file_path, rel)
                         
         print(f"Successfully created manual_setup.zip at: {zip_path}")
-        print("This zip file includes the '.claude/' and 'preferences/' folders, offering users an easy way to set up manually.")
+        print("This zip file includes the '.claude/', 'preferences/', and '.grok/' folders, and the 'AGENTS.md' file, offering users an easy way to set up manually.")
         
         # Git integration: Add, commit, and push if it's a git repository
         git_dir = os.path.join(REPO_ROOT, '.git')

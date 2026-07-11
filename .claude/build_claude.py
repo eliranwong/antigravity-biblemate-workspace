@@ -90,6 +90,11 @@ def rewrite_paths(text):
     # Inline comments describing script location: <root>/.agents/skills/...
     text = text.replace("/.agents/skills/", "/.claude/skills/")
     # zip_creator bundles the ecosystem folders for manual setup.
+    text = text.replace("folders_to_zip = ['.agents', 'preferences', '.claude', '.grok']", "folders_to_zip = ['.claude', 'preferences', '.grok']")
+    text = text.replace("containing .agents/, preferences/, .claude/, and .grok/", "containing .claude/, preferences/, and .grok/")
+    text = text.replace("the `.agents/` configuration, `preferences/`, `.claude/`, and `.grok/` directories, and the `AGENTS.md` file", "the `.claude/` configuration, `preferences/`, and `.grok/` directories, and the `AGENTS.md` file")
+    text = text.replace("to zip the `.agents/`, `preferences/`, `.claude/`, and `.grok/` folders, and the `AGENTS.md` file", "to zip the `.claude/`, `preferences/`, and `.grok/` folders, and the `AGENTS.md` file")
+    text = text.replace("includes the '.agents/', 'preferences/', '.claude/', and '.grok/' folders, and the 'AGENTS.md' file", "includes the '.claude/', 'preferences/', and '.grok/' folders, and the 'AGENTS.md' file")
     text = text.replace("['.agents', 'preferences']", "['.claude', 'preferences']")
     text = text.replace("'.agents/' and 'preferences/'", "'.claude/' and 'preferences/'")
     text = text.replace("'.agents/'", "'.claude/'")
